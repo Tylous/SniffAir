@@ -7,6 +7,7 @@ from sqlite3 import Error
 from Connect2DB import *
 
 
+
 def db_name(name):
     global db_file
     #db_file = str(raw_input("Enter name of db: "))

@@ -10,8 +10,8 @@ import sys
 import os
 import colorama
 from ConfigParser import SafeConfigParser
-#import Query as clean1
 from Queries import *
+import Queries
 
 class colors:
     GRN = '\033[92m'
@@ -52,13 +52,13 @@ def exec_menu(choice):
         try:
             
             if cmd not in menu_actions:
-                print "Invalid selection, please try again.\n"
+                print colors.RD + "Invalid selection, please try again.\n" + colors.NRM
                 menu_actions['main_menu']()
             else:
-                option = ch1[1]
+                option = str(ch1[1:])[1:-1].replace('\'', '').replace(",","")
                 menu_actions[cmd]()
         except KeyError:
-            print "Invalid selection, please try again.\n"
+            print colors.RD + "Invalid selection, please try again.\n" + colors.NRM
             menu_actions['main_menu']()
         except IndexError:
             option = ""
@@ -114,6 +114,7 @@ def Live_Packet():
         return
 
 def Offline_Capture():
+    #pdb.set_trace()
     if option == "":
         print colors.RD + "Error: Non-existant file, please try again.\n" + colors.NRM 
         menu_actions['main_menu']()
@@ -121,7 +122,10 @@ def Offline_Capture():
         path = option
         c = packet_sniffer()
         c.file(path)
-        clean1.clean_up(workspace)
+        print "[+] Cleaning Up Duplicates"
+        d = queries()
+        d.db_connect(workspace)
+        d.clean_up()
         choice()
         exec_menu(choice)
         return
@@ -139,6 +143,17 @@ def Show():
     d = queries()
     d.db_connect(workspace)
     d.show(option)
+    #clean1.show(workspace, option)
+    choice()
+    exec_menu(choice)
+    return
+
+def inscope():
+    d = queries()
+    Queries.inscope.append(option)
+    d.db_connect(workspace)
+    d.in_scope(option)
+
     #clean1.show(workspace, option)
     choice()
     exec_menu(choice)
@@ -209,6 +224,7 @@ menu_actions = {
     'offline_capture': Offline_Capture,
     'help': Help,
     'show' : Show,
+    'inscope' : inscope,
     'show_table' : show_table,
     'query' : Query,
     'load' : Load,

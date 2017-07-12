@@ -25,18 +25,21 @@ from scapy.all import *
 
 
 def Sniffer(pkt):
-	if pkt.haslayer(Dot11):
-		if pkt.type == 0 and pkt.subtype == 8 :
-			SIG = pkt[Dot11Common].Antsignal
-			print SIG
 
-
-#sniff(iface='wlan0', count=15, prn=Sniffer)
-
+	if pkt.type == 0 and pkt.subtype == 8 : 
+		if pkt.haslayer(Dot11Elt):
+			try:
+		#	try:
+				if pkt[Dot11Elt:3]:
+					CHL = str(ord(pkt[Dot11Elt:3].info))
+					print CHL 
+			except TypeError:
+				CHL = pkt[Dot11Common].Ch_Freq 
+				print CHL
 
 
 		#	Sig = str(pkt[Dot11Common].Antsignal)
 		#	print Sig
-sniff(offline="/root/eap-02.cap", count=0, prn=Sniffer)
+sniff(offline="/root/Downloads/RJdenverDay1-20160331-11-53-53-1.pcapdump", count=0, prn=Sniffer)
 
 print "This shows up tntohing happen"
