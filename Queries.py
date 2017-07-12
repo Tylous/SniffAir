@@ -9,7 +9,6 @@ from sqlite3 import Error
 import pandas as dp
 from pandas import *
 import sys
-import pdb
 
 
 
@@ -31,7 +30,6 @@ class queries():
 		con = sqlite3.connect(workspace)
 
 	def clean_up(self):
-		pdb.set_trace()
 		tb_value = 0
 		for tb in tables:
 			try:
