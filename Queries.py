@@ -9,6 +9,7 @@ from sqlite3 import Error
 import pandas as dp
 from pandas import *
 import sys
+import pdb
 
 
 
@@ -30,18 +31,19 @@ class queries():
 		con = sqlite3.connect(workspace)
 
 	def clean_up(self):
+		pdb.set_trace()
 		tb_value = 0
 		for tb in tables:
 			try:
 				qr = dp.read_sql('select * from '+ tb +'', con)
 				if tb_value == 0:
-					test = qr.drop_duplicates(subset=['sender_mac', 'username', 'bssid'], keep='first')
+					test = qr.sort_values('sigStr', ascending=False).drop_duplicates(subset=['essid', 'bssid', 'vendor', 'channel', 'encryption', 'cipher', 'auth'], keep='first')					
 				elif tb_value == 1:
-					test = qr.sort_values('sigStr', ascending=False).drop_duplicates(subset=['essid', 'bssid', 'vendor', 'channel', 'encryption', 'cipher', 'auth'], keep='first')
-				elif tb_value == 2:
 					test = qr.sort_values('sigStr', ascending=False).drop_duplicates(subset=['essid', 'client', 'vendor'], keep='first')
+				elif tb_value == 2:
+					test = qr.sort_values('sigStr', ascending=False).drop_duplicates(subset=['essid', 'bssid', 'vendor', 'channe', 'encryption', 'cipher', 'auth', 'client'], keep='first')					
 				elif tb_value == 3:
-					test = qr.sort_values('sigStr', ascending=False).drop_duplicates(subset=['essid', 'bssid', 'vendor', 'channe', 'encryption', 'cipher', 'auth', 'client'], keep='first')
+					test = qr.drop_duplicates(subset=['sender_mac', 'username', 'bssid'], keep='first')
 				clrdb = test
 				tb_value += 1
 				clrdb.reset_index(inplace=True)
