@@ -9,6 +9,9 @@ from sqlite3 import Error
 import pandas as dp
 from pandas import *
 import sys
+import logging
+logging.getLogger("scapy.runtime").setLevel(logging.CRITICAL)
+from scapy.all import *
 
 
 
@@ -17,6 +20,13 @@ tables = ['accessPoints', 'ProbeRequests', 'ProbeResponses','EAP']
 class queries():
 	def __int__(self):
 		super(queries, self).__init__()
+	
+	def blockPrint(self):
+		sys.stdout = open(os.devnull, 'w')
+
+	def enablePrint(self):
+		sys.stdout = sys.__stdout__
+
 	global inscope
 	inscope = []
 	tables = ['accessPoints', 'ProbeRequests', 'ProbeResponses','EAP']
@@ -28,6 +38,7 @@ class queries():
 	def db_connect(self, workspace):
 		global con
 		con = sqlite3.connect(workspace)
+		return con
 
 	def clean_up(self):
 		tb_value = 0
@@ -70,19 +81,37 @@ class queries():
 			print "Error: Invalid query, please try again.\n"
 
 	def in_scope(self, option):
-		print str(inscope)
-		for tb in tables:
-			try:
-				print tb
-				qr = dp.read_sql('select * from '+ tb + ' where essid = \"'+ option +'\"', con)
-				del qr['ID']
-				qr.reset_index(inplace=True)
-				qr.index.name="ID"
-				qr.index = qr.index + 1
-				del qr['index']
-				qr.to_sql("inscope_"+tb+"", con , if_exists="append")
-			except pandas.io.sql.DatabaseError: 
-				continue	
+		test = 'SSIDS'
+		self.blockPrint()
+		self.show(test)### modify with a return call
+		self.enablePrint()
+		if option in result:
+			nwssid = dp.DataFrame({'essid' : [''+option+'']})
+			inscpssid = dp.read_sql('select * from INSCOPE_SSIDS', con)
+			inscpssid = inscpssid.append(nwssid)
+			inscpssid = inscpssid.drop_duplicates()#subset=['essid'], keep='first')
+			inscpssid.to_sql("INSCOPE_SSIDS",  con, index=False, if_exists="replace")
+			for tb in tables:
+				try:
+					qr = dp.read_sql('select * from '+ tb + ' where essid = \"'+ option +'\"', con)
+					del qr['ID']
+					qr.reset_index(inplace=True)
+					qr.index.name="ID"
+					qr.index = qr.index + 1
+					del qr['index']
+					qr.to_sql("inscope_"+tb+"", con , if_exists="append")
+					insqr = dp.read_sql('select * from inscope_'+tb+'', con)
+					insqr = insqr.drop_duplicates()
+					del insqr['ID']
+					insqr.reset_index(inplace=True)
+					insqr.index.name="ID"
+					insqr.index = insqr.index + 1
+					del insqr['index']
+					insqr.to_sql("inscope_"+tb+"", con , if_exists="replace")
+				except pandas.io.sql.DatabaseError: 
+					continue	
+		else:
+			print "SSID does not exist"
 
 	def main(self, t2, where):
 		global result
@@ -128,3 +157,33 @@ class queries():
 			self.main(t2, where)
 			print str(result)
 
+	def show_inscope_ssids(self):
+		qr = dp.read_sql('select essid from INSCOPE_SSIDS', con)
+		#result = qr.to_string(index=False, header=False)
+		result = qr.to_string(formatters={'essid':'{{:<{}s}}'.format(qr['essid'].str.len().max()).format}, header=False, index=False)
+		return str(result)
+		
+
+	def hidderDone(self, pkt):
+		hidden_ssid_aps = set()
+		if pkt.haslayer(Dot11Beacon):
+			if len(pkt.info) <= 1:
+				if pkt.addr3 not in hidden_ssid_aps:
+					 hidden_ssid_aps.add(pkt.addr3)
+
+		elif pkt.haslayer(Dot11ProbeResp) and (pkt.addr3 in hidden_ssid_aps):
+			hiddenShit = dp.DataFrame({'essid' : [''+pkt.info+''], 'bssid' : [''+pkt.addr3+'']})
+			hiddenShit.to_sql("Hidden_SSID", con , if_exists="append")
+			f = dp.read_sql("select * from accesspoints", con)
+			f.loc[f['bssid'] == pkt.addr3, 'essid'] = pkt.info
+			del f['ID']
+			f.reset_index(inplace=True)
+			f.index.name="ID"
+			f.index = fuckingthingy.index + 1
+			del f['index']
+			f.to_sql("accessPoints", con, if_exists="replace")
+
+
+	def hidderDone_sniff(self, path):
+		sniff(offline=path, count=0, store=0, prn = self.hidderDone)
+		print "[+] Passive Hidden SSID Search Completed"

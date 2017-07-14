@@ -12,6 +12,11 @@ import colorama
 from ConfigParser import SafeConfigParser
 from Queries import *
 import Queries
+from HiddenSSID import *
+import SSID_stat
+from SSID_stat import *
+import Discover_Hidden_SSID
+#from Discover_Hidden_SSID import *
 
 class colors:
     GRN = '\033[92m'
@@ -126,9 +131,30 @@ def Offline_Capture():
         d = queries()
         d.db_connect(workspace)
         d.clean_up()
+        d.hidderDone_sniff(path)
         choice()
         exec_menu(choice)
         return
+
+def SSID_Info():
+    #clean1.show_table(workspace, option)
+    d = queries()
+    d.db_connect(workspace)
+    #s = SSID_stat()
+    SSID_stat.main(workspace)
+    choice()
+    exec_menu(choice)
+    return
+
+def Run_Hidden_SSID():
+    #clean1.show_table(workspace, option)
+    d = queries()
+    d.db_connect(workspace)
+    #s = SSID_stat()
+    Discover_Hidden_SSID.main(workspace)
+    choice()
+    exec_menu(choice)
+    return
 
 def show_table():
     #clean1.show_table(workspace, option)
@@ -150,7 +176,7 @@ def Show():
 
 def inscope():
     d = queries()
-    Queries.inscope.append(option)
+    #Queries.inscope.append(option)
     d.db_connect(workspace)
     d.in_scope(option)
 
@@ -171,6 +197,15 @@ def Query():
         connect_db()
         q.show()
         return
+
+def show_inscope():
+    d = queries()
+    d.db_connect(workspace)
+    result = d.show_inscope_ssids()
+    print (str(result))
+    choice()
+    exec_menu(choice)
+    return
 
 def Show_Modules():
     print "Show Modules"
@@ -224,6 +259,9 @@ menu_actions = {
     'offline_capture': Offline_Capture,
     'help': Help,
     'show' : Show,
+    'Run_Hidden_SSID': Run_Hidden_SSID,
+    'SSID_Info' : SSID_Info,
+    'show_inscope' : show_inscope,
     'inscope' : inscope,
     'show_table' : show_table,
     'query' : Query,

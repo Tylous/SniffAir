@@ -84,7 +84,13 @@ class packet_sniffer():
 
 	def SSID(self, pkt):
 		global SSID
-		SSID = str(pkt[Dot11Elt:1].info)
+		if str(pkt[Dot11Elt:1].info) == "":
+			SSID="Hidden"
+		elif str(pkt[Dot11Elt:1].info) == "\000":
+			SSID="Hidden" 
+		else:
+			SSID = str(pkt[Dot11Elt:1].info)
+
 
 	def MAC(self, pkt):
 		global MAC

@@ -25,6 +25,8 @@ def create_connection():
             (essid, bssid, vendor, channe, sigStr, encryption, cipher, auth, client)''')
         conn.execute('''CREATE TABLE EAP
             (sender_mac, username, bssid)''')
+        conn.execute('''CREATE TABLE INSCOPE_SSIDS
+            (essid)''')
     except Error as e:
         conn.close()
     finally:
