@@ -1,0 +1,308 @@
+
+
+mschapv2: Fri Jul 14 16:25:01 2017
+	 username:	dbdb
+	 challenge:	84:81:16:31:ef:d4:70:71
+	 response:	3a:2f:04:22:74:eb:8c:95:3a:30:ff:46:33:2b:09:b4:b9:08:6e:2d:27:f0:22:0b
+	 jtr NETNTLM:	dbdb:$NETNTLM$84811631efd47071$3a2f042274eb8c953a30ff46332b09b4b9086e2d27f0220b
+
+
+mschapv2: Fri Jul 14 16:25:05 2017
+	 username:	dbdb
+	 challenge:	ef:81:21:c1:a6:61:0b:ff
+	 response:	70:8c:0c:0e:f1:5e:4f:07:0a:45:3b:c9:69:96:ac:6f:df:8f:1b:c7:93:7f:07:4e
+	 jtr NETNTLM:	dbdb:$NETNTLM$ef8121c1a6610bff$708c0c0ef15e4f070a453bc96996ac6fdf8f1bc7937f074e
+
+
+mschapv2: Fri Jul 14 16:26:58 2017
+	 username:	dbdb
+	 challenge:	0b:07:9c:aa:e4:71:9a:c8
+	 response:	d6:e9:5a:6f:40:e6:25:dc:f6:2e:c3:2a:0d:0a:cc:96:68:51:c5:ba:3d:49:90:cd
+	 jtr NETNTLM:	dbdb:$NETNTLM$0b079caae4719ac8$d6e95a6f40e625dcf62ec32a0d0acc966851c5ba3d4990cd
+
+
+mschapv2: Wed Jul 19 00:44:07 2017
+	 username:	dbdb
+	 challenge:	b6:8f:55:e2:85:0f:e6:a8
+	 response:	51:5e:23:35:f5:cd:cd:af:12:64:87:85:ba:f9:17:2a:12:0e:bf:cc:16:4b:14:6a
+	 jtr NETNTLM:	dbdb:$NETNTLM$b68f55e2850fe6a8$515e2335f5cdcdaf12648785baf9172a120ebfcc164b146a
+
+
+mschapv2: Wed Jul 19 00:44:09 2017
+	 username:	dbdb
+	 challenge:	e5:e7:a1:bb:c2:77:f2:e6
+	 response:	f9:2b:60:09:a5:cf:8d:f4:95:ca:73:a3:d8:68:fd:b8:77:2e:5a:78:59:0a:0a:f5
+	 jtr NETNTLM:	dbdb:$NETNTLM$e5e7a1bbc277f2e6$f92b6009a5cf8df495ca73a3d868fdb8772e5a78590a0af5
+
+
+mschapv2: Wed Jul 19 00:44:18 2017
+	 username:	dbdb
+	 challenge:	3c:b1:f8:f4:84:06:a4:74
+	 response:	7f:1d:8a:63:3a:1b:55:40:81:6a:bf:f3:b0:ce:b2:df:cf:f8:0b:f3:3b:bd:2b:af
+	 jtr NETNTLM:	dbdb:$NETNTLM$3cb1f8f48406a474$7f1d8a633a1b5540816abff3b0ceb2dfcff80bf33bbd2baf
+
+
+mschapv2: Wed Jul 19 00:44:34 2017
+	 username:	dbdb
+	 challenge:	5f:e5:42:c7:de:06:da:86
+	 response:	f5:d9:10:ea:54:04:85:fb:0d:36:38:05:6e:81:1d:1a:12:b1:e4:20:8f:43:48:6c
+	 jtr NETNTLM:	dbdb:$NETNTLM$5fe542c7de06da86$f5d910ea540485fb0d3638056e811d1a12b1e4208f43486c
+
+
+mschapv2: Wed Jul 19 00:53:01 2017
+	 username:	dbdb
+	 challenge:	4d:3f:2a:b1:07:f4:10:70
+	 response:	a4:69:c5:85:79:a3:32:d0:90:10:f5:5c:c4:10:73:1b:ac:5e:da:28:7e:1f:c8:b8
+	 jtr NETNTLM:	dbdb:$NETNTLM$4d3f2ab107f41070$a469c58579a332d09010f55cc410731bac5eda287e1fc8b8
+
+
+mschapv2: Wed Jul 19 00:53:05 2017
+	 username:	dbdb
+	 challenge:	2b:59:f6:8a:03:0e:b5:a3
+	 response:	61:64:dd:06:94:c5:43:3f:ae:cb:64:89:5a:d0:20:97:35:3e:1b:b6:6b:75:0d:28
+	 jtr NETNTLM:	dbdb:$NETNTLM$2b59f68a030eb5a3$6164dd0694c5433faecb64895ad02097353e1bb66b750d28
+
+
+mschapv2: Wed Jul 19 00:53:14 2017
+	 username:	dbdb
+	 challenge:	ad:9a:d8:3d:14:35:bd:da
+	 response:	56:1a:0f:dd:58:17:6e:44:dd:8f:fe:8c:72:09:e2:be:19:e6:44:5e:a0:01:6d:c7
+	 jtr NETNTLM:	dbdb:$NETNTLM$ad9ad83d1435bdda$561a0fdd58176e44dd8ffe8c7209e2be19e6445ea0016dc7
+
+
+mschapv2: Wed Jul 19 00:53:21 2017
+	 username:	dbdb
+	 challenge:	b8:bb:ba:8f:8a:74:86:c1
+	 response:	7b:7f:e0:05:1f:e0:30:38:4e:1a:45:e3:f6:d8:d8:67:b7:03:53:3b:7d:c9:ae:1a
+	 jtr NETNTLM:	dbdb:$NETNTLM$b8bbba8f8a7486c1$7b7fe0051fe030384e1a45e3f6d8d867b703533b7dc9ae1a
+
+
+mschapv2: Wed Jul 19 01:27:14 2017
+	 username:	dbdb
+	 challenge:	00:a2:e2:c2:84:ae:24:63
+	 response:	85:e0:8e:e2:21:92:1d:9d:ee:cc:cf:85:b7:48:35:c0:be:77:9b:1a:fc:38:a3:2d
+	 jtr NETNTLM:	dbdb:$NETNTLM$00a2e2c284ae2463$85e08ee221921d9deecccf85b74835c0be779b1afc38a32d
+
+
+mschapv2: Wed Jul 19 01:27:16 2017
+	 username:	dbdb
+	 challenge:	4e:38:fc:cc:7c:e4:e4:24
+	 response:	81:f4:08:e4:b9:cd:5a:87:87:22:02:5b:45:6e:e0:9f:73:5a:6d:87:de:1d:88:1c
+	 jtr NETNTLM:	dbdb:$NETNTLM$4e38fccc7ce4e424$81f408e4b9cd5a878722025b456ee09f735a6d87de1d881c
+
+
+mschapv2: Wed Jul 19 01:30:08 2017
+	 username:	dbdb
+	 challenge:	ea:9c:4d:09:19:bb:e5:2e
+	 response:	1e:09:4e:42:f9:1c:85:cb:b8:98:94:f2:3d:0c:c6:91:91:33:f6:b1:13:93:1c:25
+	 jtr NETNTLM:	dbdb:$NETNTLM$ea9c4d0919bbe52e$1e094e42f91c85cbb89894f23d0cc6919133f6b113931c25
+
+
+mschapv2: Wed Jul 19 01:35:43 2017
+	 username:	dbdb
+	 challenge:	73:9f:0d:03:b3:1b:70:23
+	 response:	4b:08:a9:3c:f3:84:c2:e3:b2:92:32:2e:98:e9:fe:dc:4e:23:f2:da:e4:8f:9c:c8
+	 jtr NETNTLM:	dbdb:$NETNTLM$739f0d03b31b7023$4b08a93cf384c2e3b292322e98e9fedc4e23f2dae48f9cc8
+
+
+mschapv2: Wed Jul 19 01:35:48 2017
+	 username:	dbdb
+	 challenge:	94:99:70:20:44:bf:05:09
+	 response:	94:c1:95:31:42:cf:1b:c3:60:dd:a5:92:93:87:04:64:9e:bf:8b:8a:39:01:0f:7f
+	 jtr NETNTLM:	dbdb:$NETNTLM$9499702044bf0509$94c1953142cf1bc360dda592938704649ebf8b8a39010f7f
+
+
+mschapv2: Wed Jul 19 01:35:51 2017
+	 username:	dbdb
+	 challenge:	9a:e5:ae:05:a2:66:b0:8c
+	 response:	86:d3:80:0c:83:18:cb:a3:bc:c8:6e:b7:06:73:0e:51:63:99:fc:fa:14:33:ca:9c
+	 jtr NETNTLM:	dbdb:$NETNTLM$9ae5ae05a266b08c$86d3800c8318cba3bcc86eb706730e516399fcfa1433ca9c
+
+
+mschapv2: Wed Jul 19 01:36:03 2017
+	 username:	dbdb
+	 challenge:	a6:6a:38:57:93:ce:a6:cf
+	 response:	81:ac:8b:92:8e:2c:b2:90:38:0c:a6:51:13:57:a0:bf:09:64:f8:c4:d3:ff:a5:d2
+	 jtr NETNTLM:	dbdb:$NETNTLM$a66a385793cea6cf$81ac8b928e2cb290380ca6511357a0bf0964f8c4d3ffa5d2
+
+
+mschapv2: Wed Jul 19 01:36:23 2017
+	 username:	dbdb
+	 challenge:	d3:52:06:41:f2:7c:8c:b6
+	 response:	05:4e:4d:0c:37:57:10:9a:e3:a2:9a:fe:f4:61:7f:bc:21:25:d7:b0:57:0e:74:c5
+	 jtr NETNTLM:	dbdb:$NETNTLM$d3520641f27c8cb6$054e4d0c3757109ae3a29afef4617fbc2125d7b0570e74c5
+
+
+mschapv2: Wed Jul 19 01:43:12 2017
+	 username:	dbdb
+	 challenge:	87:de:30:8f:ad:70:59:f6
+	 response:	1a:81:8e:57:a2:19:f3:90:06:b4:07:2d:1f:c2:ee:7e:11:ec:c4:40:0c:57:17:25
+	 jtr NETNTLM:	dbdb:$NETNTLM$87de308fad7059f6$1a818e57a219f39006b4072d1fc2ee7e11ecc4400c571725
+
+
+mschapv2: Wed Jul 19 01:43:17 2017
+	 username:	dbdb
+	 challenge:	a7:2e:b5:22:24:6b:d7:1d
+	 response:	b2:54:4d:ea:60:20:53:6b:0c:23:f9:09:78:9e:bb:2d:ae:9f:5d:58:4a:6a:b9:2f
+	 jtr NETNTLM:	dbdb:$NETNTLM$a72eb522246bd71d$b2544dea6020536b0c23f909789ebb2dae9f5d584a6ab92f
+
+
+mschapv2: Wed Jul 19 01:43:33 2017
+	 username:	dbdb
+	 challenge:	ee:6c:96:d7:7b:8f:95:28
+	 response:	36:cc:7d:cf:32:06:c2:9e:cd:07:d7:9e:be:3a:98:a1:70:4d:c1:f2:1e:4c:a1:21
+	 jtr NETNTLM:	dbdb:$NETNTLM$ee6c96d77b8f9528$36cc7dcf3206c29ecd07d79ebe3a98a1704dc1f21e4ca121
+
+
+mschapv2: Wed Jul 19 01:46:40 2017
+	 username:	dbdb
+	 challenge:	a0:00:f5:35:d0:07:22:f6
+	 response:	07:cd:7c:da:85:6b:a1:6a:1e:d4:3c:21:69:df:78:cf:9f:57:c6:d9:96:43:2e:07
+	 jtr NETNTLM:	dbdb:$NETNTLM$a000f535d00722f6$07cd7cda856ba16a1ed43c2169df78cf9f57c6d996432e07
+
+
+mschapv2: Wed Jul 19 01:55:11 2017
+	 username:	dbdb
+	 challenge:	67:ba:23:25:04:f6:69:5a
+	 response:	ea:42:21:7a:77:7b:2f:8f:e5:66:df:5b:88:23:eb:26:46:2f:92:21:91:b3:fc:39
+	 jtr NETNTLM:	dbdb:$NETNTLM$67ba232504f6695a$ea42217a777b2f8fe566df5b8823eb26462f922191b3fc39
+
+
+mschapv2: Wed Jul 19 01:55:13 2017
+	 username:	dbdb
+	 challenge:	05:f1:1a:c6:5d:fa:5f:75
+	 response:	5b:c2:d1:10:55:09:ca:07:be:9e:81:63:78:69:be:b5:e5:88:5c:a6:ff:87:39:6f
+	 jtr NETNTLM:	dbdb:$NETNTLM$05f11ac65dfa5f75$5bc2d1105509ca07be9e81637869beb5e5885ca6ff87396f
+
+
+mschapv2: Wed Jul 19 01:55:22 2017
+	 username:	dbdb
+	 challenge:	16:00:d4:7a:ef:3f:3c:1f
+	 response:	d0:f2:95:b8:b6:55:c9:f5:50:9a:65:fa:f5:61:b9:61:11:75:1a:2b:6e:72:ec:3c
+	 jtr NETNTLM:	dbdb:$NETNTLM$1600d47aef3f3c1f$d0f295b8b655c9f5509a65faf561b96111751a2b6e72ec3c
+
+
+mschapv2: Wed Jul 19 01:56:37 2017
+	 username:	dbdb
+	 challenge:	9a:14:76:19:25:20:39:b5
+	 response:	fa:e8:ff:d3:83:41:aa:12:ad:a5:ca:ff:46:6f:a9:a6:a5:2b:25:f9:f2:9c:9a:65
+	 jtr NETNTLM:	dbdb:$NETNTLM$9a147619252039b5$fae8ffd38341aa12ada5caff466fa9a6a52b25f9f29c9a65
+
+
+mschapv2: Wed Jul 19 01:59:15 2017
+	 username:	dbdb
+	 challenge:	e1:93:01:bb:16:89:8f:33
+	 response:	60:48:e4:30:45:b5:e7:8c:f1:eb:5d:38:1f:4e:d6:e8:c8:ed:4a:77:3a:72:e6:8b
+	 jtr NETNTLM:	dbdb:$NETNTLM$e19301bb16898f33$6048e43045b5e78cf1eb5d381f4ed6e8c8ed4a773a72e68b
+
+
+mschapv2: Wed Jul 19 01:59:19 2017
+	 username:	dbdb
+	 challenge:	f2:c7:b0:ad:60:3f:96:55
+	 response:	ca:57:57:7f:d1:e4:17:42:2a:e3:37:1e:0a:dd:15:65:37:e1:22:3d:10:26:78:c8
+	 jtr NETNTLM:	dbdb:$NETNTLM$f2c7b0ad603f9655$ca57577fd1e417422ae3371e0add156537e1223d102678c8
+
+
+mschapv2: Wed Jul 19 01:59:25 2017
+	 username:	dbdb
+	 challenge:	b6:cb:48:ae:1a:e8:1b:85
+	 response:	0d:eb:6a:9c:fa:91:5d:2a:cc:dc:e9:b4:14:31:f1:c3:d6:19:63:cc:a0:d2:6f:90
+	 jtr NETNTLM:	dbdb:$NETNTLM$b6cb48ae1ae81b85$0deb6a9cfa915d2accdce9b41431f1c3d61963cca0d26f90
+
+
+mschapv2: Wed Jul 19 02:02:50 2017
+	 username:	dbdb
+	 challenge:	b0:9c:df:7f:08:cc:e6:82
+	 response:	8f:59:99:f9:e5:ce:aa:fa:f0:a3:c2:df:6d:3b:37:fa:7c:07:fd:d4:c6:3d:86:86
+	 jtr NETNTLM:	dbdb:$NETNTLM$b09cdf7f08cce682$8f5999f9e5ceaafaf0a3c2df6d3b37fa7c07fdd4c63d8686
+
+
+mschapv2: Wed Jul 19 02:09:28 2017
+	 username:	dbdb
+	 challenge:	e6:6e:08:82:e0:4d:6f:be
+	 response:	96:d9:0c:bb:15:21:1b:88:17:73:18:82:4c:a2:58:5e:8c:18:9a:1d:a3:04:c1:c3
+	 jtr NETNTLM:	dbdb:$NETNTLM$e66e0882e04d6fbe$96d90cbb15211b88177318824ca2585e8c189a1da304c1c3
+
+
+mschapv2: Wed Jul 19 02:09:31 2017
+	 username:	dbdb
+	 challenge:	e5:3b:87:23:bd:22:21:4f
+	 response:	51:00:ec:5f:17:c8:0a:28:97:4c:c4:84:d9:ec:08:0d:57:40:b3:a9:39:6b:22:81
+	 jtr NETNTLM:	dbdb:$NETNTLM$e53b8723bd22214f$5100ec5f17c80a28974cc484d9ec080d5740b3a9396b2281
+
+
+mschapv2: Wed Jul 19 02:09:46 2017
+	 username:	dbdb
+	 challenge:	3f:0a:9e:11:1d:c0:0c:ce
+	 response:	2a:33:04:95:e2:a9:6e:fc:b8:f0:39:92:3d:d9:66:ca:48:33:2c:b3:05:bb:c1:43
+	 jtr NETNTLM:	dbdb:$NETNTLM$3f0a9e111dc00cce$2a330495e2a96efcb8f039923dd966ca48332cb305bbc143
+
+
+mschapv2: Wed Jul 19 02:10:04 2017
+	 username:	dbdb
+	 challenge:	56:ec:a6:82:ff:dd:bf:07
+	 response:	a2:95:ec:a3:a0:cb:d8:8c:3c:37:2d:5e:fc:3d:ef:3d:91:87:60:a8:ea:21:99:af
+	 jtr NETNTLM:	dbdb:$NETNTLM$56eca682ffddbf07$a295eca3a0cbd88c3c372d5efc3def3d918760a8ea2199af
+
+
+mschapv2: Wed Jul 19 02:26:14 2017
+	 username:	dbdb
+	 challenge:	c9:09:96:5f:03:fe:67:c1
+	 response:	1f:4a:f6:3d:45:1f:61:bd:c2:ab:a0:29:8c:2d:45:33:3a:df:a9:eb:ad:3e:9f:2c
+	 jtr NETNTLM:	dbdb:$NETNTLM$c909965f03fe67c1$1f4af63d451f61bdc2aba0298c2d45333adfa9ebad3e9f2c
+
+
+mschapv2: Wed Jul 19 02:26:18 2017
+	 username:	dbdb
+	 challenge:	00:4f:2a:eb:fb:18:88:20
+	 response:	96:d4:d0:65:04:2a:ff:1f:e5:45:17:b6:b3:5e:7f:95:35:b3:b9:06:f7:cd:98:46
+	 jtr NETNTLM:	dbdb:$NETNTLM$004f2aebfb188820$96d4d065042aff1fe54517b6b35e7f9535b3b906f7cd9846
+
+
+mschapv2: Wed Jul 19 02:26:21 2017
+	 username:	dbdb
+	 challenge:	61:1f:0f:f5:0c:c0:33:7b
+	 response:	2c:6b:89:83:87:d9:f6:bc:f4:ba:83:c5:fc:59:16:fa:83:72:e4:e0:45:d7:0c:04
+	 jtr NETNTLM:	dbdb:$NETNTLM$611f0ff50cc0337b$2c6b898387d9f6bcf4ba83c5fc5916fa8372e4e045d70c04
+
+
+mschapv2: Wed Jul 19 02:26:30 2017
+	 username:	dbdb
+	 challenge:	b7:0c:05:2c:84:9c:2b:24
+	 response:	72:65:24:32:ea:3c:ca:be:15:d8:27:87:ed:37:e0:eb:d5:b0:bf:05:d5:d7:30:bb
+	 jtr NETNTLM:	dbdb:$NETNTLM$b70c052c849c2b24$72652432ea3ccabe15d82787ed37e0ebd5b0bf05d5d730bb
+
+
+mschapv2: Wed Jul 19 02:35:23 2017
+	 username:	dbdb
+	 challenge:	9d:1f:75:5e:be:ae:81:c5
+	 response:	5c:a0:27:fc:2c:3e:0a:33:95:5d:0c:58:0b:85:b6:ab:14:6b:57:cc:3e:74:47:7b
+	 jtr NETNTLM:	dbdb:$NETNTLM$9d1f755ebeae81c5$5ca027fc2c3e0a33955d0c580b85b6ab146b57cc3e74477b
+
+
+mschapv2: Wed Jul 19 02:58:40 2017
+	 username:	dbdb
+	 challenge:	31:9c:12:27:2c:f2:7e:bd
+	 response:	d6:55:e6:ea:73:1f:45:8f:10:ab:48:0d:df:0f:1e:a4:02:79:2c:47:91:76:65:6c
+	 jtr NETNTLM:	dbdb:$NETNTLM$319c12272cf27ebd$d655e6ea731f458f10ab480ddf0f1ea402792c479176656c
+
+
+mschapv2: Wed Jul 19 15:30:26 2017
+	 username:	hsba
+	 challenge:	12:d0:40:85:87:d8:71:ef
+	 response:	ae:72:5f:67:1a:38:87:d4:8c:09:dd:95:4a:86:03:8e:ee:ce:18:e4:fb:eb:93:0a
+	 jtr NETNTLM:	hsba:$NETNTLM$12d0408587d871ef$ae725f671a3887d48c09dd954a86038eeece18e4fbeb930a
+
+
+mschapv2: Wed Jul 19 15:30:32 2017
+	 username:	hsba
+	 challenge:	bf:b1:ec:e5:26:29:8c:ee
+	 response:	1f:c4:db:1c:a4:77:5f:4f:50:c5:71:81:44:46:9a:14:67:70:5d:68:40:48:89:67
+	 jtr NETNTLM:	hsba:$NETNTLM$bfb1ece526298cee$1fc4db1ca4775f4f50c5718144469a1467705d6840488967
+
+
+mschapv2: Wed Jul 19 15:31:04 2017
+	 username:	hsba
+	 challenge:	b5:2b:de:3e:0f:92:ec:56
+	 response:	cc:69:0d:8d:61:f7:24:e4:a2:70:e5:51:d0:91:45:29:c5:f5:67:af:da:59:1e:8d
+	 jtr NETNTLM:	hsba:$NETNTLM$b52bde3e0f92ec56$cc690d8d61f724e4a270e551d0914529c5f567afda591e8d
