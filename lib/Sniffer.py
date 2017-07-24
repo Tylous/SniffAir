@@ -27,7 +27,7 @@ class packet_sniffer():
 		global sw
 		sw = '2'
 		sniff(offline=path, count=0 , store=0, prn=self.Sniffer)
-		print "\n [+] Completed"
+		print "\n[+] Completed"
 
 	def live_capture(self, interface):
 		global sw
@@ -35,7 +35,7 @@ class packet_sniffer():
 		process = subprocess.Popen('airodump-ng '+interface+'', stdout=subprocess.PIPE, shell=True)
 		time.sleep(2)
 		sniff(iface=interface, count=0 , store=0, prn=self.Sniffer)
-		print "\n [+] Saving Life Captire Data"
+		print "\n[+] Saving Life Captire Data"
 		time.sleep(2)
 
 	def Sniffer(self, pkt):
@@ -90,7 +90,7 @@ class packet_sniffer():
 		global SSID
 		if str(pkt[Dot11Elt:1].info) == "":
 			SSID="Hidden"
-		elif str(pkt[Dot11Elt:1].info) == "\000":
+		elif str(pkt[Dot11Elt:1].info).startswith("\000"):
 			SSID="Hidden" 
 		else:
 			SSID = str(pkt[Dot11Elt:1].info)
@@ -128,8 +128,8 @@ class packet_sniffer():
 		global ap
 		global user
 		
-		sender = str(pkt[Dot11].addr1)
-		ap = str(pkt[Dot11].addr2)
+		ap = str(pkt[Dot11].addr1)
+		sender = str(pkt[Dot11].addr2)
 		user = str(pkt[EAP].identity)	
 
 
@@ -182,16 +182,22 @@ class RSN_ENC:
 	def Cipher_Suite(self):
 		global CHR
 		GCS = temp
-		if GCS[20:36] == "000fac02000fac04":
-			CHR = "CCMP"
-		elif GCS[4:12] == "0050f202":
-			CHR = "CCMP"
-		elif GCS[4:12] == "000fac04":
-			CHR = "CCMP"
-		elif GCS[4:12] == "f2010100":
-			CHR = "TKIP"
-		elif GCS[4:12] == "000fac02":
-			CHR = "TKIP"
+		if ENC =="WPA":
+			if GCS[8:16] == '0050f202':###TKIP WPA
+				if GCS[16:24] == "0050f204":
+					CHR = 'CCMP/TKIP'
+				else: 
+					CHR = 'TKIP'
+			if GCS[8:16] == '0050f204':###CCMP WPA
+				CHR = 'CCMP'
+		elif ENC == "WPA2":		
+			if GCS[4:12] == "000fac02":
+				if GCS[16:24] == "000fac04":
+					CHR = "CCMP/TKIP"
+				else:
+					CHR = "TKIP"
+			elif GCS[4:12] == "000fac04":
+				CHR = "CCMP"
 		else:
 			CHR = ""
 
@@ -200,7 +206,13 @@ class RSN_ENC:
 		Auth = temp
 		if Auth[36:44] == "000fac01":
 			ATH = "MGT"
+		elif Auth[36:44] == "000fac02":
+			ATH = "PSK"
+		elif Auth[28:36] == "000fac01":
+			ATH = "MGT"
 		elif Auth[28:36] == "000fac02":
 			ATH =  "PSK"
+		elif Auth[36:44]== "0050f202":
+			ATH = "PSK"
 		else:
-			ATH = ""
+			ATH = " "

@@ -50,28 +50,30 @@ class Spinner:
         time.sleep(self.delay)
 
 menu_actions  = {}
-workspace = "default"
+name = "default"
 module = ""
 try:
     def choice():
-        global workspace
+        global name
         global module
         try:
             if module == "":
-                raw_choice = raw_input(" >>  [" + workspace + "]# ")
+                raw_choice = raw_input(" >>  [" + name + "]# ")
                 choice = raw_choice
                 exec_menu(choice)
             else:
-                raw_choice = raw_input(" >>  [" + workspace + "][" + module + "]# ")
+                raw_choice = raw_input(" >>  [" + name + "][" + module + "]# ")
                 choice = raw_choice
                 exec_menu(choice)
+        except EOFError:
+            pass
         except KeyboardInterrupt:
             exec_menu('exit')
 
     # Main menu
     def main_menu():
 
-        workspace = ''
+        name = ''
         choice()
         return
      
@@ -102,14 +104,15 @@ try:
 
 
     def Create_Workspace():
+        global name
         global workspace
         if option == "":
             print colors.RD + "Missing workspace name, please try again.\n" + colors.NRM 
             menu_actions['main_menu']()
         else: 
+            workspace = "db/" + option + ".db"
+            Connect2DB.db_name(workspace)
             name = option
-            Connect2DB.db_name(name)
-            workspace = Connect2DB.db_file
             Connect2DB.create_connection()
             print colors.GRN + "[+]"+ colors.NRM +"  Workspace %s created" % (option)
             choice()
@@ -122,12 +125,19 @@ try:
             print colors.RD + "Missing workspace name, please try again.\n" + colors.NRM 
             menu_actions['main_menu']()
         else: 
+            global name
             global workspace
+            workspace = "db/" + option + ".db"
+            Connect2DB.db_name(workspace)
             name = option
-            Connect2DB.db_name(name)
-            workspace = Connect2DB.db_file
             Connect2DB.create_connection()
             print colors.GRN + "[+]"+ colors.NRM +" Workspace %s loaded" % (option)
+            d = queries()
+            d.db_connect(workspace)
+            print "[+] ESSIDs Observed"
+            EO = dp.read_sql('select * from accessPoints', d.db_connect(workspace))
+            print EO.ESSID.value_counts().to_string()
+            print "\n"
             choice()
             exec_menu(choice)
         
@@ -138,10 +148,10 @@ try:
             print colors.RD + "Error: Non-existant interface, please try again.\n" + colors.NRM 
             menu_actions['main_menu']()
         else: 
-            print "live Capture"
             global interface
-            interface = option
-            print option
+            name = "db/" + option + ".db"
+            Connect2DB.db_name(name)
+            workspace = option
             c = packet_sniffer()
             c.live_capture(interface)
             d = queries()
@@ -164,6 +174,7 @@ try:
                 spinner = Spinner()
                 spinner.start() 
                 d = queries()
+                d.db_connect(workspace)
                 filepath = option
                 listOfPcaps = open(filepath, 'r')
                 for x in listOfPcaps:
@@ -173,11 +184,10 @@ try:
                     c.file(path)
                     spinner.stop() 
                     print "[+] Cleaning Up Duplicates"
-                    d = queries()
                     d.db_connect(workspace)
                     print "[+] ESSIDs Observed"
                     EO = dp.read_sql('select * from accessPoints', d.db_connect(workspace))
-                    print EO.ESSID.value_counts()
+                    print EO.ESSID.value_counts().to_string()
                     print "\n"
                 d.clean_up()
             except IOError:
@@ -205,7 +215,7 @@ try:
                 d.clean_up()
                 print "[+] ESSIDs Observed"
                 EO = dp.read_sql('select * from accessPoints', d.db_connect(workspace))
-                print EO.ESSID.value_counts()
+                print EO.ESSID.value_counts().to_string()
                 print "\n"
                 choice()
                 exec_menu(choice)
@@ -257,20 +267,6 @@ try:
         exec_menu(choice)
         return
 
-
-
-    def Query():
-        if option == "":
-            print colors.RD + "Error: Invalid query, please try again.\n" + colors.NRM 
-            menu_actions['main_menu']()
-        else: 
-            print "Query DB"
-            q = Query()
-            print option
-            connect_db()
-            q.show()
-            return
-
     def show_inscope():
         d = queries()
         d.db_connect(workspace)
@@ -291,37 +287,42 @@ try:
         exec_menu(choice)
         return
 
-    #def Load():
-    #    if option == "":
-    #        print colors.RD + "Error: Non-existant file, please try again.\n" + colors.NRM 
-    #        menu_actions['main_menu']()
-    #    else: 
-    #        path = option
-    #        m = module()
-    #        m.interface()
-    #        d = queries()
-    #        d.db_connect(workspace)
-    #        d.clean_up()
-    #        d.hidderDone_sniff(path)
-    #        choice()
-    #        exec_menu(choice)
-    #        return
+    def Query():
+        if option == "":
+            print colors.RD + "Error: Invalid query, please try again.\n" + colors.NRM 
+            menu_actions['main_menu']()
+        else: 
+            d = queries()
+            d.db_connect(workspace)
+            d.Custom_Queries(option)
+            choice()
+            exec_menu(choice)
+            return
+    
+    def clear():
+        os.system('clear')
+        choice()
+        exec_menu(choice)
+        return
 
-    def Help():
+    def Help():#missing hidden ssid and ssid info hostapd etc
         print "Commands"
         print "========"
         print "create_workspace         Creates a new workspace"
         print "load_workspace           Loads an existing workspace"
         print "live_capture             Initiates an valid wireless interface to collect wireless pakcets to be parsed (requires the interface name)"
-        print "offline_capture          beings parsing wireless packets using an pcap file-kistmit .pcapdump work best (requires the full path)"
-        print "query                    Execute a quey on the contents of the acitve workspace"
+        print "offline_capture          begins parsing wireless packets using an pcap file-kistmit .pcapdump work best (requires the full path)"
+        print "offline_capture_list     begins parsing wireless packets using an list of pcap file-kistmit .pcapdump work best (requires the full path)"
+        print "query                    Executes a quey on the contents of the acitve workspace"
         print "help                     Displays this help menu"
-        print "show                     show stuff"
-        print "show_table               show tables in db"
+        print "show                     shows specific information from all tables"
+        print "show_table               shows a specific tables in db"
         print "inscope                  add ESSID to scope. inscope [ESSID]"
         print "show_Modules             Show SniffAir modules"
-        print "load_module              load module"
         print "use_module               Use a SniffAir module"
+        print "info                     Displays all varible infomraiton regardin the selected module"
+        print "set                      Sets a varible in module"
+        print "exploit                  Runs the loaded module"
         print "exit                     Exit SniffAir"
         choice()
         exec_menu(choice)
@@ -335,16 +336,26 @@ try:
     def info():
         print "Globally Set Varibles"
         try:
-            print " Module: "+(list1['Module'])
-            print " Interface: "+(list1['Interface'])
-            print " SSID: "+(list1['SSID'])
-            print " BSSID: "+(list1['BSSID'])
-            print " Channel: "+(list1['Channel'])
-            print " Encryption: "+(list1['Encryption'])
-            print " WPA Version: "+(list1['WPA'])
-            print " Key Management: "+(list1['Key_Management'])
-            print " Password: "+(list1['Password'])
-            print " Username File: "+(list1['Username_File'])
+            if (list1['Module']) in ["Evil Twin"]:
+                print " Module: "+(list1['Module'])
+                print " Interface: "+(list1['Interface'])
+                print " SSID: "+(list1['SSID'])
+                print " Channel: "+(list1['Channel'])
+                print " WPA Version: "+(list1['WPA'])
+            if (list1['Module']) in ["Captive Portal"]:
+                print " Module: "+(list1['Module'])
+                print " Interface: "+(list1['Interface'])
+                print " SSID: "+(list1['SSID'])
+                print " Channel: "+(list1['Channel'])
+                print " WPA Version: "+(list1['WPA'])
+            if (list1['Module']) in ["Auto EAP"]:
+                print " Module: "+(list1['Module'])
+                print " Interface: "+(list1['Interface'])
+                print " SSID: "+(list1['SSID'])
+                print " Encryption: "+(list1['Encryption'])
+                print " Key Management: "+(list1['Key_Management'])
+                print " Password: "+(list1['Password'])
+                print " Username File: "+(list1['Username_File'])
         except NameError:
             pass
         choice()
@@ -372,7 +383,7 @@ try:
             else:
                 print colors.RD + "Error: Non-existant module, please try again.\n" + colors.NRM 
         choice()
-        exec_menu(choice)
+        exec_menu(choice) 
         return
 
 
@@ -381,35 +392,38 @@ try:
         if varibles[0] == "":
             print "Missing workspace name, please try again.\n" 
             menu_actions['main_menu']()
-        if varibles[0] in ["bssid"]:
-            global bssid
-            list1.update(BSSID = varibles[1])
-            bssid = varibles[1]
-        if varibles[0] in ["channel"]:
-            global channel
-            list1.update(Channel = varibles[1])
-        if varibles[0] in ["Encryption"]:
-            global encryption
-            list1.update(Encryption = varibles[1])
-        if varibles[0] in ["ssid"]:
-            global ssid
-            list1.update(SSID = varibles[1])
-        if varibles[0] in ["interface"]:
-            global interface
-            interface = varibles[1]
-            list1.update(Interface = varibles[1])
-        if varibles[0] in ["wpa"]:
-            global wpa
-            list1.update(WPA = varibles[1])
-        if varibles[0] in ["Key_Management"]:
-            global Key_MGT 
-            list1.update(Key_Management = varibles[1])
-        if varibles[0] in ["password"]:
-            global password
-            list1.update(Password = varibles[1])
-        if varibles[0] in ["Username_File"]:
-            global Username_File
-            list1.update(Username_File = varibles[1])
+        try:
+            if varibles[0] in ["BSSID"]:
+                global bssid
+                list1.update(BSSID = varibles[1])
+                bssid = varibles[1]
+            if varibles[0] in ["Channel"]:
+                global channel
+                list1.update(Channel = varibles[1])
+            if varibles[0] in ["Encryption"]:
+                global encryption
+                list1.update(Encryption = varibles[1])
+            if varibles[0] in ["SSID"]:
+                global ssid
+                list1.update(SSID = varibles[1])
+            if varibles[0] in ["Interface"]:
+                global interface
+                interface = varibles[1]
+                list1.update(Interface = varibles[1])
+            if varibles[0] in ["WPA"]:
+                global wpa
+                list1.update(WPA = varibles[1])
+            if varibles[0] in ["Key_Management"]:
+                global Key_MGT 
+                list1.update(Key_Management = varibles[1])
+            if varibles[0] in ["Password"]:
+                global password
+                list1.update(Password = varibles[1])
+            if varibles[0] in ["Username_File"]:
+                global Username_File
+                list1.update(Username_File = varibles[1])
+        except NameError:
+            pass    
         choice()
         exec_menu(choice)
         return
@@ -428,7 +442,10 @@ try:
                     args = ' -s '+ list1['SSID']+' -c '+ list1['Channel'] +' -a \'Captive Portal\' -w '+ list1['WPA']+' -i '+ list1['Interface']+''
                     os.system('python module/hostapd.py' +args+'')
                 if module in ['Auto EAP']:
-                    args = ' -s '+ list1['SSID']+' -K '+ list1['Key_Management'] +' -E '+list1['Encryption'] +' -U '+list1['Username_File']+' -p '+ list1['Password']+' -i '+ list1['Interface']+''
+                    if not list1['Username_File']:
+                        args = ' -s '+ list1['SSID']+' -K '+ list1['Key_Management'] +' -E '+list1['Encryption'] +' -W '+workspace+' -p '+ list1['Password']+' -i '+ list1['Interface']+''
+                    else:
+                        args = ' -s '+ list1['SSID']+' -K '+ list1['Key_Management'] +' -E '+list1['Encryption'] +' -U '+list1['Username_File']+' -p '+ list1['Password']+' -i '+ list1['Interface']+''
                     os.system('cd module/Auto_EAP/ && python Auto_EAP.py' +args+'&& cd ../../')
             except KeyboardInterrupt:
                 pass
@@ -449,6 +466,7 @@ try:
         'offline_capture': Offline_Capture,
         'help': Help,
         'show' : Show,
+        'Query' : Query,
         'Run_Hidden_SSID': Run_Hidden_SSID,
         'SSID_Info' : SSID_Info,
         'show_inscope' : show_inscope,
@@ -457,6 +475,7 @@ try:
         'query' : Query,
         'set' : set,
         'info' : info,
+        'clear' : clear,
         'exploit' : exploit,
         'use_module': use_module,
         'show_modules': Show_Modules,

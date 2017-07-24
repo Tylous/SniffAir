@@ -63,7 +63,19 @@ class queries():
 			except pandas.io.sql.DatabaseError: 
 				continue  
 
-
+	def Custom_Queries(self, option):
+		try:
+			CQ = option
+			if 'AP' in CQ:
+				CQ = CQ.replace("AP","accessPoints")
+			if 'proberequests' in CQ:
+				CQ = CQ.replace("proberequests","ProbeRequests")
+			if 'proberesponses' in CQ:
+				CQ = CQ.replace("proberesponses","ProbeResponses")
+			qr = dp.read_sql(CQ, con)
+			print qr.to_string(index=False)
+		except pandas.io.sql.DatabaseError:
+			pass  
 
 
 	def show_table(self, option):
@@ -75,6 +87,9 @@ class queries():
 			print qr.to_string(index=False)
 		elif option in ["proberesponses"]:
 			qr = dp.read_sql('select * from ProbeResponses', con)
+			print qr.to_string(index=False)
+		elif option in ["hiddenssids"]:
+			qr = dp.read_sql('select * from Hidden_SSID', con)
 			print qr.to_string(index=False)
 		elif option in ["EAP"]:
 			qr = dp.read_sql('select * from EAP', con)
@@ -133,31 +148,31 @@ class queries():
 		if option in ["SSIDS"]:
 			t2 = "select ESSID from "
 			self.main(t2, where)
-			print str(result)
+			print str(result).replace(" ","")
 		elif option in ["AP_MAC"]:
 			t2 = "select BSSID from "
 			self.main(t2, where)
-			print str(result)
+			print str(result).replace(" ","")
 		elif option in ["Vendor"]:
 			t2 = "select VENDOR from "
 			self.main(t2, where)
-			print str(result)
+			print str(result).replace(" ","")
 		elif option in ["Clients"]:
 			t2 = "select CLIENT from "
 			self.main(t2, where)
-			print str(result)
-		elif option in ["Username"]:
+			print str(result).replace(" ","")
+		elif option in ["Usernames"]:
 			t2 = "select USERNAME from EAP "
 			self.main(t2, where)
-			print str(result)
+			print str(result).replace(" ","")
 		elif option in ["Channel"]:
 			t2 = "select CHAN from "
 			self.main(t2, where)
-			print str(result)
+			print str(result).replace(" ","")
 		elif option in ["Encryption"]:
 			t2 = "select ENC, AUTH, CIPHER from "
 			self.main(t2, where)
-			print str(result)
+			print str(result).replace(" ","")
 
 	def show_inscope_ssids(self):
 		qr = dp.read_sql('select ESSID from INSCOPE_SSIDS', con)

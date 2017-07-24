@@ -14,7 +14,9 @@ def main(workspace):
 	AP_BSSID = AP_BSSID.split('\n')
 	for v in AP_BSSID:
 		PR_ESSID = dp.read_sql('select ESSID from ProbeResponses where BSSID="'+v+'"', ws1).drop_duplicates()
-		PR_ESSID.to_sql("Hidden_SSID", ws1 , if_exists="append")
+		PR_BSSID = dp.read_sql('select BSSID from ProbeResponses where BSSID="'+v+'"', ws1).drop_duplicates()
+		HST = dp.concat([PR_ESSID, PR_BSSID], axis=1, join='inner') 
+		HST.to_sql("Hidden_SSID", ws1 , if_exists="append")
 		rawr = dp.read_sql('select * from accessPoints', ws1)
 		if PR_ESSID.empty:
 			continue
@@ -30,4 +32,12 @@ def main(workspace):
 			rawr.to_sql("accessPoints", ws1 , if_exists="replace")
 			value_pr = PR_ESSID.to_string(index=False, header=False)
 			print "DISCOVERED HIDDEN SSID. "+v+ " is actually: " +str(value_pr)
+
+	HS = dp.read_sql('select * from Hidden_SSID', ws1)
+	del HS['index']
+	HS.reset_index(inplace=True)
+	HS.index.name="ID"
+	HS.index = HS.index + 1
+	del HS['index']
+	HS.to_sql("Hidden_SSID", ws1 , if_exists="replace")
 	print "Completed"

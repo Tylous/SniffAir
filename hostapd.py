@@ -10,6 +10,7 @@ parser.add_argument('-s', '--ssid', metavar='SSID', dest='ssid', action='store',
 parser.add_argument('-c', '--channel', metavar='channel', dest='channel', action='store', help='Channel\n', required=True)
 parser.add_argument('-w', '--wpa', metavar='wpa', dest='wpa', action='store', help='WPA version type\n', required=True)
 parser.add_argument('-a', '--attack', metavar='attack', dest='attack', action='store', help='Attack Type\n', required=True)
+parser.add_argument('-E', '--eap_type', metavar='Eap_type', dest='eap_type', action='store', help='Eap type to use\n', required=False)
 args = parser.parse_args()
 	
 
@@ -19,6 +20,7 @@ def main():
 	channel = args.channel
 	interface = args.interface
 	wpa = args.wpa
+	encryption = ""
 
 	path = "module/hostapd/hostapd/"		
 	
@@ -45,14 +47,26 @@ def main():
         	"iptables -t nat -A PREROUTING -i wlan0 -p tcp -j DNAT --to-destination 192.168.17.128:80\n"
  			)
 
-	if attack in ["Evil Twin"]:
 
+
+	if attack in ["Evil Twin"]:
+		#if option in ["PSK"]:
+			#auth = ("wpa_key_mgmt=WPA-PSK\n"
+			#		"wpa_psk=0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef\n"
+			#		"wpa_passphrase=12345678\n"
+			#		)
+		#if option in ["MGT"]:
 		auth = ("wpa_key_mgmt=WPA-EAP\n"
 					"wpa_pairwise=TKIP CCMP\n"
 					)
+		#if option in ["WPA1"]:
 		WPA = ("wpa="+wpa+"\n"
 			"wpa_pairwise=TKIP CCMP\n"
 				)
+		#if option in ["WPA2"]:
+		#	wpa = ("wpa=2\n"
+		#		"wpa_pairwise=TKIP CCMP\n"
+		#		)
 
 	CHANNEL = ("channel="+channel+"\n")
 	SSID = ("ssid="+ssid+"\n")

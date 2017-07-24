@@ -8,10 +8,10 @@ from Connect2DB import *
 
 
 
-def db_name(name):
+def db_name(workspace):
     global db_file
     #db_file = str(raw_input("Enter name of db: "))
-    db_file = name
+    db_file = workspace
 
 def create_connection():
     """ create a database connection to a SQLite database """
