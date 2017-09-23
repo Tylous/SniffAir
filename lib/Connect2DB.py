@@ -5,12 +5,12 @@ import os
 import sqlite3
 from sqlite3 import Error
 from Connect2DB import *
-
+from tabulate import tabulate
+import pandas as dp
 
 
 def db_name(workspace):
     global db_file
-    #db_file = str(raw_input("Enter name of db: "))
     db_file = workspace
 
 def create_connection():
@@ -27,10 +27,28 @@ def create_connection():
             (SRC_MAC, USERNAME, BSSID)''')
         conn.execute('''CREATE TABLE INSCOPE_SSIDS
             (ESSID)''')
+        conn.execute('''CREATE TABLE LOOT
+            (MAC, USERNAME, PASSWORD)''')
     except Error as e:
         conn.close()
     finally:
         conn.close()
+
+
+def list():
+    db_list = str(os.listdir('db/'))[1:-1].replace('.db','').replace(',','').replace('\'','').split()
+    dbl=[]
+    for p in db_list:
+        dbl.append("workspace load "+p)
+
+def display_list():
+    dl = str(os.listdir('db/'))[1:-1].replace('.db','').replace(',','').replace('\'','')
+    frame = dp.DataFrame(dl.split())
+    print tabulate(frame, showindex=False, headers=['Workspaces'], tablefmt='psql')
+
+
+def delete_workspace(workspace):      
+    os.system('rm -rf db/'+workspace+'.db')
 
 def connect_db():
     global connection

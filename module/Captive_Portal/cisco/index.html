@@ -1,0 +1,143 @@
+<html><head>
+    <title>Web Authentication</title>
+    <meta http-equiv="Cache-control" content="no-cache">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="-1">
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+    <style>
+        <!--
+        DIV.sidebar {
+            RIGHT: 0px;
+            POSITION: absolute;
+            TOP: -1px;
+            HEIGHT: 100%;
+            width: 200;
+        }
+        DIV.graybar {
+            RIGHT: 0px; POSITION: absolute; TOP: 0px; HEIGHT: 100%; BACKGROUND-COLOR: #f8f8f8
+        }
+        /* background not be shown for NEC */
+
+        DIV.header {
+            BACKGROUND-POSITION: right 50%; LEFT: 0px; BACKGROUND-IMAGE:  url(images/background_web41.jpg); WIDTH: 100%; BACKGROUND-REPEAT: repeat; POSITION: absolute; TOP: 0px; HEIGHT: 52px; BACKGROUND-COLOR: #FFFFFF}
+
+
+        DIV.content {
+            LEFT: 14px; MARGIN: 15px; POSITION: absolute; TOP: 60px
+        }
+        H1 {
+            FONT-WEIGHT: bold; FONT-SIZE: 19px; MARGIN: 16px 0px 0px 25px; COLOR: #ffffff; FONT-FAMILY: Tahoma, Arial, Helvetica, sans-serif
+        }
+        H2 {
+            FONT-WEIGHT: bold; FONT-SIZE: 15px; MARGIN: 10px 0px 0px 10px; COLOR: #336666; FONT-FAMILY: Arial, Helvetica, sans-serif
+        }
+        INPUT {
+            FONT-SIZE: 12px; FONT-FAMILY: Arial, Helvetica, sans-serif
+        }
+        INPUT.button {
+            MARGIN-TOP: 10px; FONT-WEIGHT: bold; WIDTH: 80px; COLOR: #ffffff; BACKGROUND-COLOR: #669999
+        }
+        P {
+            FONT-SIZE: 12px; MARGIN: 0px 0px 10px; COLOR: #001133; FONT-FAMILY: Arial, Helvetica, sans-serif
+        }
+        TD {
+            FONT-WEIGHT: bold; FONT-SIZE: 12px; COLOR: #336666; FONT-FAMILY: Arial, Helvetica, sans-serif
+        }
+        TD.message {
+            FONT-WEIGHT: normal; COLOR: #000000
+        }
+        -->
+    </style>
+</head>
+<body leftmargin="0" topmargin="0" onload="unhideform();" bgcolor="#ffffff" marginheight="0" marginwidth="0" text="#000000">
+<form method="post" action="auth.html">
+    <!--input name="buttonClicked" size="16" maxlength="15" value="0" type="hidden"-->
+    <!--input name="err_flag" size="16" maxlength="15" value="0" type="hidden"-->
+    <!--input name="err_msg" size="32" maxlength="31" value="" type="hidden"-->
+    <!--input name="info_flag" size="16" maxlength="15" value="0" type="hidden"-->
+    <!--input name="info_msg" size="32" maxlength="31" value="" type="hidden"-->
+    <input name="redirect_url" size="255" maxlength="255" value="" type="hidden">
+    <div style="display: block;" id="formId">
+        <table cellpading="0" border="0" cellspacing="0" width="100%">
+            <tbody><tr>
+                <td style="padding-bottom: 4px;" background="images/background.jpg" width="180" align="center">
+
+                    <h1>Login</h1>
+                </td>
+
+                <td style="padding-bottom: 4px; padding-right: 20px;" background="images/background.jpg" height="53" align="right">
+                    <div align="right"><img src="images/cisco.gif" height="40" width="67"></div></td>
+
+            </tr>
+            <tr>
+                <td width="400" align="left">
+                    <div class="content">
+                        <table border="0" cellpadding="0" cellspacing="10">
+                            <tbody><tr>
+                                <td>
+                                    <table border="0" cellpadding="0" cellspacing="10">
+                                        <tbody><tr>
+                                            <th width="400" align="left">
+                                                Welcome to the Cisco wireless network
+                                            </th>
+                                        </tr>
+                                        <tr>
+                                            <td class="message" width="400" align="left">
+                                                Cisco is pleased to provide the Wireless
+                                                LAN infrastructure for your network. Please login and put your air
+                                                space to work.
+                                            </td>
+                                        </tr>
+                                        </tbody></table>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    <table border="0" cellpadding="0" cellspacing="10">
+                                        <tbody><tr>
+                                            <td nowrap="nowrap" width="100">User Name</td>
+                                            <td>
+                                                <input name="username" size="25" maxlength="80" type="TEXT">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td nowrap="nowrap">Password</td>
+                                            <td>
+                                                <input name="password" autocomplete="off"  size="25" maxlength="127" value="" type="Password">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>&nbsp;</td>
+                                            <td>
+                                                <input value="Submit" class="button" type="submit">
+
+                                            </td>
+                                        </tr>
+                                        </tbody></table>
+                                </td>
+                            </tr>
+
+                            </tbody></table>
+                    </div>
+                </td>
+                <td align="right">
+                    <table border="0" cellpadding="0" cellspacing="10">
+                        <tbody><tr>
+                            <td style="padding-top: 25px; padding-right: 20px;" bgcolor="#ffffff" align="right">
+                                <div></div></td>
+                        </tr>
+                        </tbody></table>
+                </td>
+            </tr>
+            </tbody></table>
+    </div>
+</form>
+
+
+<meta http-equiv="Cache-control" content="no-cache">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="-1">
+
+
+</body></html>

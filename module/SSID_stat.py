@@ -20,7 +20,7 @@ def main(workspace):
 		print "No inscope SSIDSs found, please add a SSID before running this module again.\n"
 		return
 	else:
-		result = str(q.show_inscope_ssids())#.replace(" ",""))
+		result = str(q.show_inscope_ssids())
 		result = result.split('\n')
 		for SSID in result:
 			j = 0
@@ -28,7 +28,7 @@ def main(workspace):
 			for v in varibles:
 				try:
 					t2 = 'select '+ v +' from '
-					where = ' where ESSID = \"'+ SSID +'\"'
+					where = ' where ESSID = \"'+ SSID.rstrip() +'\"'
 					result = dp.DataFrame()
 					for tb in tables:
 						try:

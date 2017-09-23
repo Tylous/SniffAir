@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-from menu import *
+from SniffAir import *
 from Connect2DB import *
 import Connect2DB
 import subprocess
@@ -13,7 +13,12 @@ logging.getLogger("scapy.runtime").setLevel(logging.CRITICAL)
 from scapy.all import *
 import sqlite3
 from sqlite3 import Error
+import threading
 
+
+GRN = '\033[92m'
+RD = '\033[91m'
+NRM = '\033[0m'
 
 
 class packet_sniffer():
@@ -27,16 +32,28 @@ class packet_sniffer():
 		global sw
 		sw = '2'
 		sniff(offline=path, count=0 , store=0, prn=self.Sniffer)
-		print "\n[+] Completed"
+		print "\n" + GRN + "[+]"+ NRM +" Completed"
 
 	def live_capture(self, interface):
 		global sw
 		sw = '1'
-		process = subprocess.Popen('airodump-ng '+interface+'', stdout=subprocess.PIPE, shell=True)
-		time.sleep(2)
-		sniff(iface=interface, count=0 , store=0, prn=self.Sniffer)
-		print "\n[+] Saving Life Captire Data"
-		time.sleep(2)
+		os.system('screen -S sniff -d -m airodump-ng '+ interface)
+		print GRN + "[+]"+ NRM +" Sniffing... to monitor it yourself, open a new terminal and run: screen -r"
+		while interface:
+			try:
+				sniff(iface=interface, count=0 , store=0, prn=self.Sniffer)
+			except select.error:
+				continue
+			except socket.error:
+				continue		
+			except KeyboardInterrupt:
+				time.sleep(2)
+				break
+			os.system('screen -S sniff -X quit')
+			print "\n" + GRN + "[+]"+ NRM +" Completed"
+			break
+		
+		
 
 	def Sniffer(self, pkt):
 		global connection
@@ -134,43 +151,42 @@ class packet_sniffer():
 
 
 	def ENC(self, pkt):
-		global temp
-		global ENC
-		global CHR
-		global ATH
-		capability = pkt.sprintf("{Dot11Beacon:%Dot11Beacon.cap%}\
+			global temp
+			global ENC
+			global CHR
+			global ATH
+			ENC = ""
+			capability = pkt.sprintf("{Dot11Beacon:%Dot11Beacon.cap%}\
                 {Dot11ProbeResp:%Dot11ProbeResp.cap%}") 
-		if re.search("privacy", capability):
 			temp = pkt
 			while temp:
 				temp = temp.getlayer(Dot11Elt) 
 				if temp and temp.ID == 48:
-					ENC = "WPA2"	
+					ENC += "WPA2"	
 					tr = temp.info
 					temp= str(tr).encode("hex")
 					t = RSN_ENC()
 					t.Cipher_Suite()
 					t.Auth_Management()
 					return
-				elif temp and temp.ID == 221 and str(temp.info).encode("hex").startswith("0050f20101000"):
-					ENC = "WPA"
+				elif temp and temp.ID == 221 and str(temp.info).encode("hex").startswith("0050f2010100"):
+					ENC += "WPA"
 					tr = temp.info
 					temp= str(tr).encode("hex")
 					t = RSN_ENC()
 					t.Cipher_Suite()
 					t.Auth_Management()
 					return
-				else:
-					ENC = "WEP"
-					CHR = "WEP"
-					ATH = "None"
 				temp = temp.payload
-		else:
-			ENC = "OPEN"
-			temp ="None"
-			t = RSN_ENC()
-			t.Cipher_Suite()
-			t.Auth_Management()
+			if not ENC:
+				if re.search("privacy", capability):
+					ENC = "WEP"
+					CHR = ""
+					ATH = ""
+				else:
+					ENC = "OPEN"
+					CHR = ""
+					ATH = ""
 
 
 			
@@ -183,12 +199,12 @@ class RSN_ENC:
 		global CHR
 		GCS = temp
 		if ENC =="WPA":
-			if GCS[8:16] == '0050f202':###TKIP WPA
-				if GCS[16:24] == "0050f204":
-					CHR = 'CCMP/TKIP'
-				else: 
-					CHR = 'TKIP'
-			if GCS[8:16] == '0050f204':###CCMP WPA
+
+			if GCS[16:24] == "0050f204":
+				CHR = 'CCMP/TKIP'
+			elif GCS[16:24] == "f2020200": 
+				CHR = 'TKIP'
+			elif GCS[8:16] == '0050f204':
 				CHR = 'CCMP'
 		elif ENC == "WPA2":		
 			if GCS[4:12] == "000fac02":
@@ -212,7 +228,7 @@ class RSN_ENC:
 			ATH = "MGT"
 		elif Auth[28:36] == "000fac02":
 			ATH =  "PSK"
-		elif Auth[36:44]== "0050f202":
+		elif Auth[32:40]== "0050f202":
 			ATH = "PSK"
 		else:
 			ATH = " "
