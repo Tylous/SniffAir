@@ -83,35 +83,38 @@ try:
 
 
 		def show_table(self, option):
-			if option in ["AP"]:
-				qr = dp.read_sql('select * from accessPoints', con)
-				print (tabulate(qr.drop_duplicates(), showindex=False, headers=qr.columns, tablefmt="psql")) 
-			elif option in ["proberequests"]:
-				qr = dp.read_sql('select * from ProbeRequests', con)
-				print (tabulate(qr.drop_duplicates(), showindex=False, headers=qr.columns, tablefmt="psql"))
-			elif option in ["proberesponses"]:
-				qr = dp.read_sql('select * from ProbeResponses', con)
-				print (tabulate(qr.drop_duplicates(), showindex=False, headers=qr.columns, tablefmt="psql"))
-			elif option in ["inscope_AP"]:
-				qr = dp.read_sql('select * from inscope_accessPoints', con)
-				print (tabulate(qr.drop_duplicates(), showindex=False, headers=qr.columns, tablefmt="psql")) 
-			elif option in ["inscope_proberequests"]:
-				qr = dp.read_sql('select * from inscope_proberequests', con)
-				print (tabulate(qr.drop_duplicates(), showindex=False, headers=qr.columns, tablefmt="psql"))
-			elif option in ["inscope_proberesponses"]:
-				qr = dp.read_sql('select * from inscope_proberesponses', con)
-				print (tabulate(qr.drop_duplicates(), showindex=False, headers=qr.columns, tablefmt="psql"))
-			elif option in ["hiddenssids"]:
-				qr = dp.read_sql('select * from Hidden_SSID', con)
-				print (tabulate(qr.drop_duplicates(), showindex=False, headers=qr.columns, tablefmt="psql"))
-			elif option in ["EAP"]:
-				qr = dp.read_sql('select * from EAP', con)
-				print (tabulate(qr.drop_duplicates(), showindex=False, headers=qr.columns, tablefmt="psql"))
-			elif option in ["LOOT"]:
-				qr = dp.read_sql('select * from LOOT', con)
-				print (tabulate(qr.drop_duplicates(), showindex=False, headers=qr.columns, tablefmt="psql"))
-			else: 
-				print colors.RD + "Error: Invalid query, please try again.\n" + colors.NRM
+			try:
+				if option in ["AP"]:
+					qr = dp.read_sql('select * from accessPoints', con)
+					print (tabulate(qr.drop_duplicates(), showindex=False, headers=qr.columns, tablefmt="psql")) 
+				elif option in ["proberequests"]:
+					qr = dp.read_sql('select * from ProbeRequests', con)
+					print (tabulate(qr.drop_duplicates(), showindex=False, headers=qr.columns, tablefmt="psql"))
+				elif option in ["proberesponses"]:
+					qr = dp.read_sql('select * from ProbeResponses', con)
+					print (tabulate(qr.drop_duplicates(), showindex=False, headers=qr.columns, tablefmt="psql"))
+				elif option in ["inscope_AP"]:
+					qr = dp.read_sql('select * from inscope_accessPoints', con)
+					print (tabulate(qr.drop_duplicates(), showindex=False, headers=qr.columns, tablefmt="psql")) 
+				elif option in ["inscope_proberequests"]:
+					qr = dp.read_sql('select * from inscope_proberequests', con)
+					print (tabulate(qr.drop_duplicates(), showindex=False, headers=qr.columns, tablefmt="psql"))
+				elif option in ["inscope_proberesponses"]:
+					qr = dp.read_sql('select * from inscope_proberesponses', con)
+					print (tabulate(qr.drop_duplicates(), showindex=False, headers=qr.columns, tablefmt="psql"))
+				elif option in ["hiddenssids"]:
+					qr = dp.read_sql('select * from Hidden_SSID', con)
+					print (tabulate(qr.drop_duplicates(), showindex=False, headers=qr.columns, tablefmt="psql"))
+				elif option in ["EAP"]:
+					qr = dp.read_sql('select * from EAP', con)
+					print (tabulate(qr.drop_duplicates(), showindex=False, headers=qr.columns, tablefmt="psql"))
+				elif option in ["LOOT"]:
+					qr = dp.read_sql('select * from LOOT', con)
+					print (tabulate(qr.drop_duplicates(), showindex=False, headers=qr.columns, tablefmt="psql"))
+				else: 
+					print colors.RD + "Error: Invalid query, please try again.\n" + colors.NRM
+			except pandas.io.sql.DatabaseError:
+				print colors.RD + "Error: Table does not exist or is empty, please try again.\n" + colors.NRM
 
 		def in_scope(self, option):
 			showvar = 'SSIDS'
