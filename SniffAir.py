@@ -54,7 +54,7 @@ module = ""
 try:
     workspace = ['workspace create', 'workspace delete', 'workspace list', 'workspace load']
     show = ['show SSIDS', 'show AP_MAC', 'show Vendor', 'show Channel', 'show Client', 'show Encrpytion', 'show table', 'show inscope', 'show modules', 'show inscope']
-    table = ['show table AP', 'show table proberequests', 'show table proberesponse', 'show table EAP', 'show table hiddenssids', 'show table LOOT', 'show table inscope_AP', 'show table inscope_proberequests', 'show table inscope_proberesponse',]
+    table = ['show table AP', 'show table proberequests', 'show table proberesponses', 'show table EAP', 'show table hiddenssids', 'show table LOOT', 'show table inscope_AP', 'show table inscope_proberequests', 'show table inscope_proberesponse',]
     modules = ['use Hidden SSID', 'use Evil Twin', 'use Captive Portal', 'use Auto EAP', 'use Exporter']
 
     def completer(text, state):
