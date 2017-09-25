@@ -35,7 +35,7 @@ $python setup.py
 Commands
 ========
 workspace                Manages workspaces (create, list, load, delete)
-live_capture             Initiates an valid wireless interface to collect wireless pakcets to be parsed (requires the interface name)
+live_capture             Initiates an valid wireless interface to collect wireless packets to be parsed (requires the interface name)
 offline_capture          Begins parsing wireless packets using an pcap file-kistmit .pcapdump work best (requires the full path)
 offline_capture_list     Begins parsing wireless packets using an list of pcap file-kistmit .pcapdump work best (requires the full path)
 query                    Executes a quey on the contents of the acitve workspace
