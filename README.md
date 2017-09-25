@@ -36,16 +36,16 @@ Commands
 ========
 workspace                Manages workspaces (create, list, load, delete)
 live_capture             Initiates an valid wireless interface to collect wireless packets to be parsed (requires the interface name)
-offline_capture          Begins parsing wireless packets using an pcap file-kistmit .pcapdump work best (requires the full path)
-offline_capture_list     Begins parsing wireless packets using an list of pcap file-kistmit .pcapdump work best (requires the full path)
-query                    Executes a quey on the contents of the acitve workspace
+offline_capture          Begins parsing wireless packets using an pcap file-kistmet .pcapdump work best (requires the full path)
+offline_capture_list     Begins parsing wireless packets using an list of pcap file-kistmet .pcapdump work best (requires the full path)
+query                    Executes a query on the contents of the acitve workspace
 help                     Displays this help menu
 clear                    Clears the screen
-show                     Shows the contents of a table, specific information accorss all tables or the avilable modules
+show                     Shows the contents of a table, specific information across all tables or the avilable modules
 inscope                  Add ESSID to scope. inscope [ESSID]
 use                      Use a SniffAir module
-info                     Displays all varible infomraiton regardin the selected module
-set                      Sets a varible in module
+info                     Displays all variable information regarding the selected module
+set                      Sets a variable in module
 exploit                  Runs the loaded module
 exit                     Exit SniffAir
  >>  [default]# 
