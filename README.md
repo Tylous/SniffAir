@@ -1,6 +1,6 @@
 # SniffAir
 
-SniffAir is an open-source wireless security framework. Sniffair allows for the collection, management, and analyzation of wireless traffic. In additional, SniffAir can also be used to preform sophisticated wireless attacks. SniffAir was born out of the hassle of managing large or multiple pcap files while thoroughly cross-examining and analyzing the traffic, looking for potential security flaws or malicious traffic. 
+SniffAir is an open-source wireless security framework. Sniffair allows for the collection, management, and analysis of wireless traffic. In additional, SniffAir can also be used to preform sophisticated wireless attacks. SniffAir was born out of the hassle of managing large or multiple pcap files while thoroughly cross-examining and analyzing the traffic, looking for potential security flaws or malicious traffic. 
 
 SniffAir is developed by [@Tyl0us](https://twitter.com/Tyl0us) and [@theDarracott](https://twitter.com/theDarracott)
 
@@ -35,7 +35,7 @@ $python setup.py
 Commands
 ========
 workspace                Manages workspaces (create, list, load, delete)
-live_capture             Initiates an valid wireless interface to collect wireless pakcets to be parsed (requires the interface name)
+live_capture             Initiates an valid wireless interface to collect wireless packets to be parsed (requires the interface name)
 offline_capture          Begins parsing wireless packets using an pcap file-kistmit .pcapdump work best (requires the full path)
 offline_capture_list     Begins parsing wireless packets using an list of pcap file-kistmit .pcapdump work best (requires the full path)
 query                    Executes a quey on the contents of the acitve workspace
