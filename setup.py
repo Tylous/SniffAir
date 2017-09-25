@@ -10,6 +10,7 @@ os.system('apt-get install libssl1.0-dev')
 os.system('apt-get install libnfnetlink-dev')
 os.system('apt-get install libnl-3-dev')
 os.system('apt-get install libnl-genl-3-dev')
+os.system('apt-get install tcpdump')
 os.system('cd module/Auto_EAP/ && python RunMeFirst.py cd ../../')
 
 
