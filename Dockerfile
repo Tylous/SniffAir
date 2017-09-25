@@ -1,7 +1,7 @@
 
 FROM python:2.7-stretch
 RUN apt-get update && apt-get upgrade -y
-RUN apt-get install git aircrack-ng tcpdump libnl-3-dev dnsmasq libssl1.0-dev libnfnetlink-dev libnl-genl-3-dev screen -y
+RUN apt-get install git aircrack-ng tcpdump libnl-3-dev dnsmasq libssl1.0-dev libnfnetlink-dev libnl-genl-3-dev screen wireshark -y
 RUN git clone https://github.com/Tylous/SniffAir.git
 WORKDIR /SniffAir/module/Auto_EAP/
 RUN python RunMeFirst.py
