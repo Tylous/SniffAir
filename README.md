@@ -9,7 +9,7 @@ SniffAir is developed by [@Tyl0us](https://twitter.com/Tyl0us) and [@theDarracot
 -----
 SniffAir was developed with Python version 2.7
 
-Tested and supported on Debian, Ubuntu, Fedora, and Kali Linux
+Tested and supported on Kali Linux.
 
 
 To install run the setup.py script
