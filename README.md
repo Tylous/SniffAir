@@ -112,7 +112,7 @@ The ```query``` command can be used to display a unique set of data based on the
 ## Modules
 -----
 
-Modules can be used to analyze the data contained in the workspaces or preform offensive wireless attacks using the ```use <module name>``` command. For some modules additional variables may need to be set. They can be set using the set command ```set <variable name> <variable value>```:
+Modules can be used to analyze the data contained in the workspaces or perform offensive wireless attacks using the ```use <module name>``` command. For some modules additional variables may need to be set. They can be set using the set command ```set <variable name> <variable value>```:
 ```
  >>  [demo]# show modules
 Available Modules
