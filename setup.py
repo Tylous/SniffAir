@@ -29,6 +29,7 @@ for module in modules:
 os.system('cd module/ && tar -xvzf hostapd-2.6.tar.gz && mv hostapd-2.6/ hostapd/ && cd hostapd/ && patch -p1 < ../hostapd-wpe/hostapd-wpe.patch && cd hostapd && make')
 os.system('cd module/hostapd-wpe/certs && ./bootstrap && cd ../../')
 os.system('hg clone https://bitbucket.org/secdev/scapy-com && dpkg --ignore-depends=python-scapy -r python-scapy && cd scapy-com && python setup.py install && cd ../ && rm -rf scapy-com/')
+os.system('rm db/.keep')
 
 
 print "All Dependinces installed. Run SniffAir.py to use SniffAir"
