@@ -563,6 +563,7 @@ try:
         'info' : info,
         'clear' : clear,
         'exploit' : exploit,
+        'run': exploit,
         'use': use,
         'exit': exit,
     }
