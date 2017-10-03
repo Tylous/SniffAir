@@ -22,7 +22,7 @@ class Spinner:
 
     @staticmethod
     def spinning_cursor():
-        while 1: 
+        while 1:
             for cursor in '|/-\\':
                 yield cursor
 
@@ -56,35 +56,42 @@ try:
     show = ['show SSIDS', 'show AP_MAC', 'show Vendor', 'show Channel', 'show Client', 'show Encrpytion', 'show table', 'show inscope', 'show modules', 'show inscope']
     table = ['show table AP', 'show table proberequests', 'show table proberesponses', 'show table EAP', 'show table hiddenssids', 'show table LOOT', 'show table inscope_AP', 'show table inscope_proberequests', 'show table inscope_proberesponses',]
     modules = ['use Hidden SSID', 'use Evil Twin', 'use Captive Portal', 'use Auto EAP', 'use Exporter']
+    modset = ['set BSSID', 'set Channel', 'set Encryption', 'set SSID', 'set Interface', 'set WPA', 'set Key Management', 'set Password', 'set Username File', 'set Path']
 
     def completer(text, state):
         if text.startswith("workspace"):
             workspace_list = [x for x in workspace if x.startswith(text)]
-            try:     
+            try:
                 return workspace_list[state]
             except IndexError:
                 return None
         if text.startswith("show table"):
             table_list = [x for x in table if x.startswith(text)]
-            try:     
+            try:
                return table_list[state]
             except IndexError:
                 return None
         elif text.startswith("show"):
             show_list = [x for x in show if x.startswith(text)]
-            try:     
+            try:
                return show_list[state]
             except IndexError:
                 return None
         if text.startswith("use"):
             module_list = [x for x in modules if x.startswith(text)]
-            try:     
+            try:
                return module_list[state]
+            except IndexError:
+                return None
+        if text.startswith("set"):
+            modset_list = [x for x in modset if x.startswith(text)]
+            try:
+               return modset_list[state]
             except IndexError:
                 return None
         else:
             options = [x for x in menu_actions if x.startswith(text)]
-            try:     
+            try:
                    return options[state]
             except IndexError:
                 return None
@@ -125,7 +132,7 @@ try:
         name = ''
         choice()
         return
-     
+
 
     def exec_menu(choice):
         global option
@@ -160,7 +167,7 @@ try:
     def Workspace():
         global name
         global workspace
-        
+
         if option == "":
             print "     Manages workspaces"
             print " Command Option: workspaces [create|list|load|delete]"
@@ -168,7 +175,7 @@ try:
         else:
             wso = option.split(' ')
             if wso[0] == "create" and wso[1] == "":
-                    print colors.RD + "Missing workspace name, please try again.\n" + colors.NRM 
+                    print colors.RD + "Missing workspace name, please try again.\n" + colors.NRM
                     menu_actions['main_menu']()
             if wso[0] == "create" and wso[1]:
                     workspace = "db/" + wso[1] + ".db"
@@ -177,7 +184,7 @@ try:
                     Connect2DB.create_connection()
                     print colors.GRN + "[+]"+ colors.NRM +"  Workspace %s created" % (wso[1])
             if wso[0] == "load" and wso[1] == "":
-                    print colors.RD + "Missing workspace name, please try again.\n" + colors.NRM 
+                    print colors.RD + "Missing workspace name, please try again.\n" + colors.NRM
                     menu_actions['main_menu']()
             if wso[0] == "load" and wso[1]:
                     workspace = "db/" + wso[1] + ".db"
@@ -205,7 +212,7 @@ try:
                 Connect2DB.display_list()
             if wso[0] == "delete":
                 if wso[1] == "":
-                    print colors.RD + "Missing workspace name, please try again.\n" + colors.NRM 
+                    print colors.RD + "Missing workspace name, please try again.\n" + colors.NRM
                     menu_actions['main_menu']()
                 else:
                     Connect2DB.delete_workspace(wso[1])
@@ -216,20 +223,20 @@ try:
     def Live_Capture():
         db_check()
         if option == "":
-            print colors.RD + "Error: No interface selected, please try again.\n" + colors.NRM 
+            print colors.RD + "Error: No interface selected, please try again.\n" + colors.NRM
             menu_actions['main_menu']()
         else:
-            try: 
+            try:
                 global interface
                 interface = option
                 c = packet_sniffer()
                 c.live_capture(interface)
-                print colors.GRN + "[+] " + colors.NRM + "Cleaning Up Duplicates" 
+                print colors.GRN + "[+] " + colors.NRM + "Cleaning Up Duplicates"
                 d = queries()
                 d.db_connect(workspace)
                 d.clean_up()
             except socket.error:
-                print colors.RD + "Error: Non-existant interface, please try again.\n" + colors.NRM 
+                print colors.RD + "Error: Non-existant interface, please try again.\n" + colors.NRM
             choice()
             exec_menu(choice)
             return
@@ -237,12 +244,12 @@ try:
     def Offline_Capture_List():
         db_check()
         if option == "":
-            print colors.RD + "Error: Non-existant file, please try again.\n" + colors.NRM 
+            print colors.RD + "Error: Non-existant file, please try again.\n" + colors.NRM
             menu_actions['main_menu']()
         else:
             try:
                 spinner = Spinner()
-                spinner.start() 
+                spinner.start()
                 d = queries()
                 d.db_connect(workspace)
                 filepath = option
@@ -257,7 +264,7 @@ try:
                 d = queries()
                 d.db_connect(workspace)
                 d.clean_up()
-                print colors.GRN + "[+] " + colors.NRM + "ESSIDs Observed" 
+                print colors.GRN + "[+] " + colors.NRM + "ESSIDs Observed"
                 EO = dp.read_sql('select * from accessPoints', d.db_connect(workspace))
                 print EO.ESSID.value_counts().to_string()
                 print "\n"
@@ -266,21 +273,21 @@ try:
                 print colors.RD + "Error: Non-existant path, please try again.\n" + colors.NRM
             choice()
             exec_menu(choice)
-            return 
+            return
 
     def Offline_Capture():
         db_check()
         if option == "":
-            print colors.RD + "Error: Non-existant file, please try again.\n" + colors.NRM 
+            print colors.RD + "Error: Non-existant file, please try again.\n" + colors.NRM
             menu_actions['main_menu']()
         else:
             try:
                 spinner = Spinner()
-                spinner.start() 
+                spinner.start()
                 path = option
                 c = packet_sniffer()
                 c.file(path)
-                spinner.stop() 
+                spinner.stop()
                 print colors.GRN + "[+] " + colors.NRM + "Cleaning Up Duplicates"
                 d = queries()
                 d.db_connect(workspace)
@@ -291,13 +298,13 @@ try:
                 print "\n"
                 choice()
                 exec_menu(choice)
-                return    
+                return
             except IOError:
                 spinner.stop()
                 print colors.RD + "Error: Non-existant path, please try again.\n" + colors.NRM
                 choice()
                 exec_menu(choice)
-                return   
+                return
 
     def SSID_Info():
         db_check()
@@ -342,16 +349,16 @@ try:
     def Query():
         db_check()
         if option == "":
-            print colors.RD + "Error: Invalid query, please try again.\n" + colors.NRM 
+            print colors.RD + "Error: Invalid query, please try again.\n" + colors.NRM
             menu_actions['main_menu']()
-        else: 
+        else:
             d = queries()
             d.db_connect(workspace)
             d.Custom_Queries(option)
             choice()
             exec_menu(choice)
             return
-    
+
     def clear():
         os.system('clear')
         choice()
@@ -423,10 +430,10 @@ try:
 
     def use():
         if option == "":
-            print colors.RD + "Missing Module name, please try again.\n" + colors.NRM 
+            print colors.RD + "Missing Module name, please try again.\n" + colors.NRM
             menu_actions['main_menu']()
         else:
-            global module 
+            global module
             global list1
             list1 = {'Module': '','Interface': '','SSID': '','BSSID': '','Channel': '','Encryption': '','WPA': '','Key_Management': '','Password': '', 'Username_File': '', 'Path': ''}
             if option in ["Evil Twin"]:
@@ -446,20 +453,20 @@ try:
                 module = option
                 list1.update(Module = module)
             else:
-                print colors.RD + "Error: Non-existant module, please try again.\n" + colors.NRM 
+                print colors.RD + "Error: Non-existant module, please try again.\n" + colors.NRM
         choice()
-        exec_menu(choice) 
+        exec_menu(choice)
         return
 
 
     def set():
         if module == "":
-            print colors.RD + "Missing Module name, please try again.\n" + colors.NRM 
+            print colors.RD + "Missing Module name, please try again.\n" + colors.NRM
             menu_actions['main_menu']()
         else:
             varibles = option.split(' ')
             if varibles[0] == "":
-                print "Missing Varibles name, please try again.\n" 
+                print "Missing Varibles name, please try again.\n"
                 menu_actions['main_menu']()
             try:
                 if varibles[0] in ["BSSID"]:
@@ -483,7 +490,7 @@ try:
                     global wpa
                     list1.update(WPA = varibles[1])
                 if varibles[0]+' '+varibles[1] in ["Key Management"]:
-                    global Key_MGT 
+                    global Key_MGT
                     list1.update(Key_Management = varibles[2])
                 if varibles[0] in ["Password"]:
                     global password
@@ -495,14 +502,14 @@ try:
                     global Path
                     list1.update(Path = varibles[1])
             except NameError:
-                pass    
+                pass
             choice()
             exec_menu(choice)
             return
 
-    def exploit(): 
+    def exploit():
         if module == "":
-            print colors.RD + "No module selected, please try again.\n" + colors.NRM 
+            print colors.RD + "No module selected, please try again.\n" + colors.NRM
             menu_actions['main_menu']()
             global p###?what isthis?
         else:
@@ -515,13 +522,13 @@ try:
                 if module in ['Exporter']:
                     d = queries()
                     d.db_connect(workspace)
-                    export.main(workspace, list1['Path'], name) 
+                    export.main(workspace, list1['Path'], name)
                 if module in ['Evil Twin']:
                     if list1['SSID'] and list1['Channel'] and list1['Interface']:
                         args = ' -s '+ list1['SSID']+' -c '+ list1['Channel'] +' -a \'Evil Twin\' -w '+ list1['WPA']+' -i '+ list1['Interface']+' -d '+workspace+''
-                        os.system('python module/hostapd.py'+args+'') 
+                        os.system('python module/hostapd.py'+args+'')
                     else:
-                        print "Error: Invalid or Missing Arguements" 
+                        print "Error: Invalid or Missing Arguements"
                 if module in ['Captive Portal']:
                     if list1['SSID'] and list1['Channel'] and list1['Interface']:
                         args = ' -s '+ list1['SSID']+' -c '+ list1['Channel'] +' -a \'Captive Portal\' -i '+ list1['Interface']+' -d '+workspace+''
@@ -542,7 +549,7 @@ try:
         choice()
         exec_menu(choice)
         return
-     
+
     # =======================
     #   Menu Options
     # =======================
@@ -568,7 +575,6 @@ try:
         'exit': exit,
     }
 
-     
 except Exception:
     pass
 
