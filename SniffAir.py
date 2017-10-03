@@ -1,5 +1,5 @@
 #!/usr/bin/python
-import sys, os, signal, readline, time, threading, subprocess
+import sys, os, os.path, signal, readline, time, threading, subprocess
 sys.path.insert(0, 'module/')
 sys.path.insert(0, 'lib/')
 from Sniffer import *
@@ -579,4 +579,10 @@ def banner():
 if __name__ == "__main__":
     banner()
     print "\n"
+    if len(sys.argv) > 1:
+        ws = sys.argv[1]
+        if os.path.exists('db/' + ws + '.db'):
+            exec_menu('workspace load ' + ws)
+        else:
+            exec_menu('workspace create ' + ws)
     main_menu()
