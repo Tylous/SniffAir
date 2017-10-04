@@ -37,7 +37,7 @@ class packet_sniffer():
 	def live_capture(self, interface):
 		global sw
 		sw = '1'
-		os.system('screen -S sniff -d -m airodump-ng '+ interface)
+		os.system('sudo screen -S sniff -d -m airodump-ng '+ interface)
 		print GRN + "[+]"+ NRM +" Sniffing... to monitor it yourself, open a new terminal and run: screen -r"
 		while interface:
 			try:
@@ -49,7 +49,7 @@ class packet_sniffer():
 			except KeyboardInterrupt:
 				time.sleep(2)
 				break
-			os.system('screen -S sniff -X quit')
+			os.system('sudo screen -S sniff -X quit')
 			print "\n" + GRN + "[+]"+ NRM +" Completed"
 			break
 		
