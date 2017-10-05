@@ -48,8 +48,6 @@ class packet_sniffer():
 				os.system('screen -S sniff -X quit')
 				print "\n" + RD + "[+]"+ NRM +" Network interface went down"
 				break
-			except select.error:
-				continue
 			except socket.error:
 				continue		
 			except KeyboardInterrupt:
