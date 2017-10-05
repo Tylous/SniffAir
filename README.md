@@ -9,12 +9,12 @@ SniffAir is developed by [@Tyl0us](https://twitter.com/Tyl0us) and [@theDarracot
 -----
 SniffAir was developed with Python version 2.7
 
-Tested and supported on Kali Linux.
+Tested and supported on Kali Linux, Debian and Ubuntu. 
 
 
-To install run the setup.py script
+To install run the setup.sh script
 ```
-$python setup.py
+$./setup.sh
 ```
 
 ## Usage
@@ -40,18 +40,20 @@ $python setup.py
 Commands
 ========
 workspace                Manages workspaces (create, list, load, delete)
-live_capture             Initiates an valid wireless interface to collect wireless packets to be parsed (requires the interface name)
-offline_capture          Begins parsing wireless packets using an pcap file-kistmet .pcapdump work best (requires the full path)
-offline_capture_list     Begins parsing wireless packets using an list of pcap file-kistmet .pcapdump work best (requires the full path)
+live_capture             Initiates a valid wireless interface to collect wireless pakcets to be parsed (requires the interface name)
+offline_capture          Begins parsing wireless packets using a pcap file-kismet .pcapdump work best (requires the full path)
+offline_capture_list     Begins parsing wireless packets using a list of pcap file-kismet .pcapdump work best (requires the full path)
 query                    Executes a query on the contents of the acitve workspace
 help                     Displays this help menu
 clear                    Clears the screen
-show                     Shows the contents of a table, specific information across all tables or the avilable modules
+show                     Shows the contents of a table, specific information across all tables or the available modules
 inscope                  Add ESSID to scope. inscope [ESSID]
+SSID_Info                Displays all information (i.e all BSSID, Channels and Encrpytion) related to the inscope SSIDS
 use                      Use a SniffAir module
 info                     Displays all variable information regarding the selected module
 set                      Sets a variable in module
 exploit                  Runs the loaded module
+run                      Runs the loaded module
 exit                     Exit SniffAir
  >>  [default]# 
 ```
@@ -69,7 +71,7 @@ First create or load a new or existing workspace using the command ```workspace 
 ```
 
 
-Load data into a desired workplace from a pcap file using the command ```offline_capture <the full path to the pcap file>```. To load a series of pcap files use the command ```offline_capture_list <the full path to the file containing the list of pcap name>``` (this file should contain the full patches to each pcap file).
+Load data into a desired workplace from a pcap file using the command ```offline_capture <the full path to the pcap file>```. To load a series of pcap files use the command ```offline_capture_list <the full path to the file containing the list of pcap name>``` (this file should contain the full patches to each pcap file). Use the ```live_capture <interface name>``` command to capture live wireless traffic using a wireless interface.
  
  ```
  >>  [demo]# offline_capture /root/sniffair/demo.pcapdump
@@ -109,6 +111,10 @@ Demo5ghz
 
 The ```query``` command can be used to display a unique set of data based on the parememters specificed. The ```query``` command uses sql syntax.
 
+## Inscope
+-----
+the ```inscope <SSID>``` command can be used to add a SSID to the inscope tables, loading all related data to the inscope_AP, inscope_proberequests and inscope_proberesponses tables. To view a summary of all inscope SSIDS run the ```SSID_Info``` command.
+
 ## Modules
 -----
 
@@ -144,7 +150,7 @@ Globally Set Varibles
  Template: Cisco (More to be added soon)
  >>  [demo][Captive Portal]# 
 ```
-Once all varibles are set, then execute the exploit command to run the desired attack.
+Once all varibles are set, then execute the ```exploit``` or ```run``` command to run the desired attack.
 
 
 ## Export
