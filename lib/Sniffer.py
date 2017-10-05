@@ -15,6 +15,8 @@ import sqlite3
 from sqlite3 import Error
 import threading
 
+load_contrib('ppi_cace')
+
 
 GRN = '\033[92m'
 RD = '\033[91m'
@@ -42,15 +44,19 @@ class packet_sniffer():
 		while interface:
 			try:
 				sniff(iface=interface, count=0 , store=0, prn=self.Sniffer)
+			except OSError:
+				os.system('screen -S sniff -X quit')
+				print "\n" + RD + "[+]"+ NRM +" Network interface went down"
+				break
 			except select.error:
 				continue
 			except socket.error:
 				continue		
 			except KeyboardInterrupt:
 				time.sleep(2)
+				os.system('screen -S sniff -X quit')
+				print "\n" + GRN + "[+]"+ NRM +" Completed"
 				break
-			os.system('screen -S sniff -X quit')
-			print "\n" + GRN + "[+]"+ NRM +" Completed"
 			break
 		
 		
@@ -87,9 +93,10 @@ class packet_sniffer():
 				sql.Insert_Probe_RESPONSE(SSID, MAC, Vendor, CHL, SIG, ENC, CHR, ATH, RPCM)
 			
 		if pkt.haslayer(EAP):
-			if len(pkt[EAP].identity) > 0:
-				self.EAP_Identity(pkt)
-				sql.Insert_EAP(sender, user, ap)
+			if pkt[EAP].id == 1:
+				if len(pkt[EAP].identity) > 0:
+					self.EAP_Identity(pkt)
+                    			sql.Insert_EAP(sender, user, ap)
  		
 
 	def Vendor(self, pkt):
@@ -137,7 +144,8 @@ class packet_sniffer():
 			SIG = pkt[Dot11Common].Antsignal
 
 		if sw == '1':
-			SIG = str(pkt.dBm_AntSignal)
+			SIG = -(256-ord(pkt.notdecoded[-2:-1]))
+
 
 
 	def EAP_Identity(self, pkt):

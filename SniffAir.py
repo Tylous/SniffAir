@@ -259,6 +259,7 @@ try:
                     path = x.replace('\n','')
                     c = packet_sniffer()
                     c.file(path)
+		spinner.stop()
                 d.clean_up()
                 print colors.GRN + "[+] " + colors.NRM + "Cleaning Up Duplicates"
                 d = queries()
@@ -377,10 +378,12 @@ try:
         print "clear                    Clears the screen"
         print "show                     Shows the contents of a table, specific information across all tables or the available modules"
         print "inscope                  Add ESSID to scope. inscope [ESSID]"
-        print "use                      Use a SniffAir module"
+        print "SSID_Info                Displays all information (i.e all BSSID, Channels and Encrpytion) related to the inscope SSIDS"
+	print "use                      Use a SniffAir module"
         print "info                     Displays all variable information regarding the selected module"
         print "set                      Sets a variable in module"
         print "exploit                  Runs the loaded module"
+	print "run                      Runs the loaded module"
         print "exit                     Exit SniffAir"
         choice()
         exec_menu(choice)

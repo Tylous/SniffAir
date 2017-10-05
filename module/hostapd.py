@@ -84,7 +84,7 @@ def main():
         subprocess.call('iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE', shell=True)
 
         if hw_mode == "a":
-            auth += "country_code=US\nieee80211d=1\n"
+            IFACE += "country_code=US\nieee80211d=1\n"
 
         file = auth + SSID + CHANNEL + IFACE
         outfile = open(''+path+'hostapd-wpe.conf', 'w')
@@ -140,8 +140,9 @@ def main():
                 "hw_mode=" + hw_mode +"\n"
                 "wpe_logfile=module/loot.log\n"
                 )
+
         if hw_mode == "a":
-            auth += "country_code=US\nieee80211d=1\n"
+            hostapd += "country_code=US\nieee80211d=1\n"
         file = hostapd + auth + SSID + CHANNEL + IFACE + WPA
         outfile = open(''+path+'hostapd-wpe.conf', 'w')
         outfile.write(file)
