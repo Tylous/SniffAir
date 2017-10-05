@@ -163,7 +163,7 @@ try:
 								qr.index.name="ID"
 								qr.index = qr.index + 1
 								del qr['index']
-								qr.to_sql("inscope_"+tb+"", con , if_exists="append")
+								qr.to_sql("inscope_"+tb+"", con , if_exists="replace")
 								insqr = dp.read_sql('select * from inscope_'+tb+'', con)
 								insqr = insqr.drop_duplicates()
 								del insqr['ID']
