@@ -228,9 +228,11 @@ try:
         else:
             try:
                 global interface
+		global band
+		band = raw_input(" >>  Do you want to sniff 2.4ghz, 5.5ghz or both?[2.4/5.5/both]# ")
                 interface = option
                 c = packet_sniffer()
-                c.live_capture(interface)
+                c.live_capture(interface, band)
                 print colors.GRN + "[+] " + colors.NRM + "Cleaning Up Duplicates"
                 d = queries()
                 d.db_connect(workspace)
