@@ -36,28 +36,32 @@ class packet_sniffer():
 		sniff(offline=path, count=0 , store=0, prn=self.Sniffer)
 		print "\n" + GRN + "[+]"+ NRM +" Completed"
 
-	def live_capture(self, interface):
+	def live_capture(self, interface, band):
 		global sw
 		sw = '1'
-		os.system('screen -S sniff -d -m airodump-ng '+ interface)
+		if band == "2.4":
+			bd = "bg"
+		elif band == "5.5":
+			bd = "a"
+		elif band == "both":
+			bd = "abg"
+		os.system('sudo screen -S sniff -d -m airodump-ng '+ interface +' --band '+ bd)
 		print GRN + "[+]"+ NRM +" Sniffing... to monitor it yourself, open a new terminal and run: screen -r"
 		while interface:
 			try:
 				sniff(iface=interface, count=0 , store=0, prn=self.Sniffer)
 			except OSError:
-				os.system('screen -S sniff -X quit')
+				os.system('sudo screen -S sniff -X quit')
 				print "\n" + RD + "[+]"+ NRM +" Network interface went down"
 				break
 			except socket.error:
-				continue		
+				continue
 			except KeyboardInterrupt:
 				time.sleep(2)
-				os.system('screen -S sniff -X quit')
+				os.system('sudo screen -S sniff -X quit')
 				print "\n" + GRN + "[+]"+ NRM +" Completed"
 				break
 			break
-		
-		
 
 	def Sniffer(self, pkt):
 		global connection
