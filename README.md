@@ -156,3 +156,11 @@ Once all varibles are set, then execute the ```exploit``` or ```run``` command t
 ## Export
 -----
 To export all information stored in a workspace’s tables using the ```Exporter``` module and setting the desired path.
+
+
+## Acknowledgments
+-----
+Sniffiar contains work from the following repoisoties:
+- [hostapd-wpe](https://github.com/OpenSecurityResearch/hostapd-wpe)
+- [jmalinen/hostap](https://github.com/jmalinen/hostap/tree/master/wpaspy)
+
