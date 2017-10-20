@@ -19,6 +19,7 @@ load_contrib('ppi_cace')
 
 
 GRN = '\033[92m'
+BLU = '\033[34m'
 RD = '\033[91m'
 NRM = '\033[0m'
 
@@ -33,6 +34,7 @@ class packet_sniffer():
 	def file(self, path):
 		global sw
 		sw = '2'
+                print BLU + "[*]" + NRM + " Importing " + path
 		sniff(offline=path, count=0 , store=0, prn=self.Sniffer)
 		print "\n" + GRN + "[+]"+ NRM +" Completed"
 
