@@ -97,10 +97,15 @@ class packet_sniffer():
 				sql.Insert_Probe_RESPONSE(SSID, MAC, Vendor, CHL, SIG, ENC, CHR, ATH, RPCM)
 			
 		if pkt.haslayer(EAP):
-			if pkt[EAP].id == 1:
-				if len(pkt[EAP].identity) > 0:
-					self.EAP_Identity(pkt)
-                    			sql.Insert_EAP(sender, user, ap)
+			if pkt[EAP].id == 1 and pkt[EAP].code == 2:
+				try:
+					if len(pkt[EAP].identity) > 0:
+						self.EAP_Identity(pkt)
+						sql.Insert_EAP(sender, user, ap)
+				except TypeError:
+					print "\n" + RD + "[+]"+ NRM +" An error has occurred"
+					print pkt.show()
+					os.kill(os.getpid(), signal.SIGINT)
  		
 
 	def Vendor(self, pkt):
