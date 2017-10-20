@@ -34,7 +34,7 @@ class packet_sniffer():
 	def file(self, path):
 		global sw
 		sw = '2'
-                print BLU + "[*]" + NRM + " Importing " + path
+		print BLU + "[*]" + NRM + " Importing " + path
 		sniff(offline=path, count=0 , store=0, prn=self.Sniffer)
 		print "\n" + GRN + "[+]"+ NRM +" Completed"
 
