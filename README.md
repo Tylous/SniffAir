@@ -75,6 +75,7 @@ Load data into a desired workplace from a pcap file using the command ```offline
  
  ```
  >>  [demo]# offline_capture /root/sniffair/demo.pcapdump
+[+] Importing /root/sniffair/demo.pcapdump
 \
 [+] Completed
 [+] Cleaning Up Duplicates
@@ -122,11 +123,15 @@ Modules can be used to analyze the data contained in the workspaces or perform o
 ```
  >>  [demo]# show modules
 Available Modules
-[+] Run Hidden SSID
-[+] Evil Twin
-[+] Captive Portal
-[+] Auto EAP
-[+] Exporter
+[+] Auto EAP - Automated Brute-Force Login Attack Against EAP Networks
+[+] Auto PSK - Automated Brute-Force Passphrase Attack Against PSK Networks
+[+] AP Hunter - Discover Access Point Within  a Certain Range Using a Specific Type of Encrpytion
+[+] Captive Portal - Web Based Login Portal to Capture User Entered Credentials (Runs as an OPEN Network)
+[+] Certificate Generator - Generates a Certificate Used by Evil Twin Attacks
+[+] Exporter - Exports Data Stored in a Workspace to a CVS File
+[+] Evil Twin - Creates a Fake Access Point, Clients Connect to Divulging MSCHAP Hashes or Cleartext Passwords
+[+] Run Hidden SSID - Discovers the Names of HIDDEN SSIDS
+[+] Suspicious AP - Looks for Access Points that: Is On Different Channel, use a Different Vendor or Encrpytion Type Then the Rest of The Network
  >>  [demo]# 
  >>  [demo]# use Captive Portal
  >>  [demo][Captive Portal]# info
@@ -163,4 +168,6 @@ To export all information stored in a workspace’s tables using the ```Exporter
 Sniffiar contains work from the following repoisoties:
 - [hostapd-wpe](https://github.com/OpenSecurityResearch/hostapd-wpe)
 - [jmalinen/hostap](https://github.com/jmalinen/hostap/tree/master/wpaspy)
+- [lootbooty](https://github.com/Torinson/lootbooty)
+
 

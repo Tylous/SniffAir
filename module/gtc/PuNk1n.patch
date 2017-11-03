@@ -1,0 +1,33 @@
+diff -uNr freeradius-server-2.1.12/src/modules/rlm_eap/types/rlm_eap_mschapv2/rlm_eap_mschapv2.c free-booty/src/modules/rlm_eap/types/rlm_eap_mschapv2/rlm_eap_mschapv2.c
+--- freeradius-server-2.1.12/src/modules/rlm_eap/types/rlm_eap_mschapv2/rlm_eap_mschapv2.c	2011-09-30 07:12:07.000000000 -0700
++++ free-booty/src/modules/rlm_eap/types/rlm_eap_mschapv2/rlm_eap_mschapv2.c	2013-03-06 14:52:58.654060839 -0700
+@@ -685,12 +685,12 @@
+ 			 PW_MSCHAP2_SUCCESS);
+ 		data->code = PW_EAP_MSCHAPV2_SUCCESS;
+ 
+-	} else if (inst->send_error) {
+-	  pairmove2(&response, &handler->request->reply->vps,
+-		    PW_MSCHAP_ERROR);
+-		data->code = PW_EAP_MSCHAPV2_FAILURE;
++	} else if (rcode == RLM_MODULE_FAIL) {
++		pairmove2(&response, &handler->request->reply->vps,
++			 PW_MSCHAP2_SUCCESS);
++		data->code = PW_EAP_MSCHAPV2_SUCCESS;
+ 	} else {
+-		eap_ds->request->code = PW_EAP_FAILURE;
++		eap_ds->request->code = PW_EAP_MSCHAPV2_SUCCESS;
+ 		return 1;
+ 	}
+ 
+diff -uNr freeradius-server-2.1.12/src/modules/rlm_pap/rlm_pap.c free-booty/src/modules/rlm_pap/rlm_pap.c
+--- freeradius-server-2.1.12/src/modules/rlm_pap/rlm_pap.c	2011-09-30 07:12:07.000000000 -0700
++++ free-booty/src/modules/rlm_pap/rlm_pap.c	2013-03-06 14:50:57.750056029 -0700
+@@ -578,7 +578,7 @@
+ 
+ 	fail:
+ 		RDEBUG("No password configured for the user.  Cannot do authentication");
+-		return RLM_MODULE_FAIL;
++		return RLM_MODULE_OK;
+ 
+ 	} else {
+ 		vp = NULL;

@@ -9,6 +9,21 @@ then
 	python RunMeFirst.py
 	popd
 	pushd module/
+	wget ftp://ftp.freeradius.org/pub/radius/old/freeradius-server-2.1.12.tar.bz2
+	tar -jxvf freeradius-server-2.1.12.tar.bz2
+	mv freeradius-server-2.1.12 freeradius
+	rm -rf freeradius-server-2.1.12.tar.bz2
+	pushd freeradius
+	patch -p1 < ../gtc/PuNk1n.patch
+	./configure
+	make
+	make install
+	ldconfig
+	mv /usr/local/etc/raddb/eap.conf /usr/local/etc/raddb/eap.conf.bak
+	mv ../gtc/eap.conf /usr/local/etc/raddb/eap.conf
+	mv /usr/local/etc/raddb/clients.conf /usr/local/etc/raddb/clients.conf.bak
+	mv ../gtc/clients.conf /usr/local/etc/raddb/clients.conf
+	popd
 	wget https://w1.fi/releases/hostapd-2.6.tar.gz
 	tar -xzf hostapd-2.6.tar.gz
 	mv hostapd-2.6/ hostapd/
@@ -33,6 +48,25 @@ then
 	python RunMeFirst.py
 	popd
 	pushd module/
+		pushd module/Auto_EAP/
+	python RunMeFirst.py
+	popd
+	pushd module/
+	wget ftp://ftp.freeradius.org/pub/radius/old/freeradius-server-2.1.12.tar.bz2
+	tar -jxvf freeradius-server-2.1.12.tar.bz2
+	mv freeradius-server-2.1.12 freeradius
+	rm -rf freeradius-server-2.1.12.tar.bz2
+	pushd freeradius
+	patch -p1 < ../gtc/PuNk1n.patch
+	./configure
+	make
+	make install
+	ldconfig
+	mv /usr/local/etc/raddb/eap.conf /usr/local/etc/raddb/eap.conf.bak
+	mv ../gtc/eap.conf /usr/local/etc/raddb/eap.conf
+	mv /usr/local/etc/raddb/clients.conf /usr/local/etc/raddb/clients.conf.bak
+	mv ../gtc/clients.conf /usr/local/etc/raddb/clients.conf
+	popd
 	wget https://w1.fi/releases/hostapd-2.6.tar.gz
 	tar -xzf hostapd-2.6.tar.gz
 	mv hostapd-2.6/ hostapd/
@@ -57,6 +91,25 @@ then
 	python RunMeFirst.py
 	popd
 	pushd module/
+		pushd module/Auto_EAP/
+	python RunMeFirst.py
+	popd
+	pushd module/
+	wget ftp://ftp.freeradius.org/pub/radius/old/freeradius-server-2.1.12.tar.bz2
+	tar -jxvf freeradius-server-2.1.12.tar.bz2
+	mv freeradius-server-2.1.12 freeradius
+	rm -rf freeradius-server-2.1.12.tar.bz2
+	pushd freeradius
+	patch -p1 < ../gtc/PuNk1n.patch
+	./configure
+	make
+	make install
+	ldconfig
+	mv /usr/local/etc/raddb/eap.conf /usr/local/etc/raddb/eap.conf.bak
+	mv ../gtc/eap.conf /usr/local/etc/raddb/eap.conf
+	mv /usr/local/etc/raddb/clients.conf /usr/local/etc/raddb/clients.conf.bak
+	mv ../gtc/clients.conf /usr/local/etc/raddb/clients.conf
+	popd
 	wget https://w1.fi/releases/hostapd-2.6.tar.gz
 	tar -xzf hostapd-2.6.tar.gz
 	mv hostapd-2.6/ hostapd/
