@@ -34,9 +34,14 @@ class packet_sniffer():
 	def file(self, path):
 		global sw
 		sw = '2'
+		sys.stdout.write('\b')
 		print BLU + "[*]" + NRM + " Importing " + path
+		sql = load()
+		connect_db()
+		sql.begin()
 		sniff(offline=path, count=0 , store=0, prn=self.Sniffer)
-		print "\n" + GRN + "[+]"+ NRM +" Completed"
+		sys.stdout.write('\b')
+		sql.Close()
 
 	def live_capture(self, interface, band):
 		global sw
@@ -50,6 +55,9 @@ class packet_sniffer():
 		os.system('sudo screen -S sniff -d -m airodump-ng '+ interface +' --band '+ bd)
 		time.sleep(2)
 		print GRN + "[+]"+ NRM +" Sniffing... to monitor it yourself, open a new terminal and run: screen -r"
+		sql = load()
+		connect_db()
+		sql.begin()
 		while interface:
 			try:
 				sniff(iface=interface, count=0 , store=0, prn=self.Sniffer)
@@ -62,14 +70,13 @@ class packet_sniffer():
 			except KeyboardInterrupt:
 				time.sleep(2)
 				os.system('sudo screen -S sniff -X quit')
-				print "\n" + GRN + "[+]"+ NRM +" Completed"
 				break
+			sql.Close()
 			break
 
 	def Sniffer(self, pkt):
 		global connection
 		sql = load()
-		connect_db()
 		if pkt.haslayer(Dot11):
 			if pkt.type == 0 and pkt.subtype == 8 : 
 				self.Vendor(pkt)
@@ -128,8 +135,8 @@ class packet_sniffer():
 		elif str(pkt[Dot11Elt:1].info).startswith("\000"):
 			SSID="Hidden" 
 		else:
-			SSID = str(pkt[Dot11Elt:1].info)
-
+			SSID = pkt[Dot11Elt:1].info
+			SSID = SSID.decode('utf-8', 'ignore')
 
 	def MAC(self, pkt):
 		global MAC
@@ -206,9 +213,6 @@ class packet_sniffer():
 					ENC = "OPEN"
 					CHR = ""
 					ATH = ""
-
-
-			
 
 class RSN_ENC:
 	def __int__(self, temp):
