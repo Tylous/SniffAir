@@ -1,5 +1,5 @@
 #!/usr/bin/python
-import sys, os, os.path, signal, readline, time, threading, subprocess
+import sys, os, os.path, signal, time, readline, threading, subprocess
 sys.path.insert(0, 'module/')
 sys.path.insert(0, 'lib/')
 from Sniffer import *
