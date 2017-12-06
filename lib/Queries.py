@@ -125,7 +125,36 @@ try:
 			self.blockPrint()
 			self.show(showvar)
 			self.enablePrint()
-			if option in result:
+			if str(option) == "update":
+				rssid = str(self.show_inscope_ssids())
+				rssid = rssid.split('\n')
+				con.execute('''DROP table inscope_accessPoints''')
+				con.execute('''DROP table inscope_proberequests''')
+				con.execute('''DROP table inscope_proberesponses''')
+				for SSID in rssid:
+					for tb in tables:
+						try:
+							qr = dp.read_sql('select * from '+ tb + ' where ESSID = \"'+ SSID +'\"', con)
+							try:
+								del qr['ID']
+								qr.reset_index(inplace=True)
+								qr.index.name="ID"
+								qr.index = qr.index + 1
+								del qr['index']
+								qr.to_sql("inscope_"+tb+"", con , if_exists="append")
+								insqr = dp.read_sql('select * from inscope_'+tb+'', con)
+								insqr = insqr.drop_duplicates()
+								del insqr['ID']
+								insqr.reset_index(inplace=True)
+								insqr.index.name="ID"
+								insqr.index = insqr.index + 1
+								del insqr['index']
+								insqr.to_sql("inscope_"+tb+"", con , if_exists="replace")
+							except pandas.io.sql.DatabaseError: 
+								continue
+						except pandas.io.sql.DatabaseError:
+							continue
+			elif option in result:
 				nwssid = dp.DataFrame({'ESSID' : [''+option+'']})
 				inscpssid = dp.read_sql('select * from INSCOPE_SSIDS', con)
 				inscpssid = inscpssid.append(nwssid)
@@ -150,32 +179,6 @@ try:
 						insqr.to_sql("inscope_"+tb+"", con , if_exists="replace")
 					except pandas.io.sql.DatabaseError: 
 						continue
-    			elif str(option) == "update":
-				rssid = str(self.show_inscope_ssids())
-				rssid = rssid.split('\n')
-				for SSID in rssid:
-					for tb in tables:
-						try:
-							qr = dp.read_sql('select * from '+ tb + ' where ESSID = \"'+ SSID +'\"', con)
-							try:
-								del qr['ID']
-								qr.reset_index(inplace=True)
-								qr.index.name="ID"
-								qr.index = qr.index + 1
-								del qr['index']
-								qr.to_sql("inscope_"+tb+"", con , if_exists="replace")
-								insqr = dp.read_sql('select * from inscope_'+tb+'', con)
-								insqr = insqr.drop_duplicates()
-								del insqr['ID']
-								insqr.reset_index(inplace=True)
-								insqr.index.name="ID"
-								insqr.index = insqr.index + 1
-								del insqr['index']
-								insqr.to_sql("inscope_"+tb+"", con , if_exists="replace")
-							except pandas.io.sql.DatabaseError: 
-								continue
-						except pandas.io.sql.DatabaseError:
-							continue
 			else:
 				print colors.RD + "SSID does not exist" + colors.NRM
 
