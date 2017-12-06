@@ -19,6 +19,7 @@ class colors:
 	GRN = '\033[92m'
 	RD = '\033[91m'
 	NRM = '\033[0m'
+	BLU = '\033[34m'
 
 class Spinner:
 	busy = False
@@ -257,18 +258,23 @@ try:
 			menu_actions['main_menu']()
 		else:
 			try:
-				spinner = Spinner()
-				spinner.start()
+				t = time.time()
+				
+				
 				d = queries()
 				d.db_connect(workspace)
 				filepath = option
 				listOfPcaps = open(filepath, 'r')
 				for x in listOfPcaps:
 					x = x
+					spinner = Spinner()
+					spinner.start()
 					path = x.replace('\n','')
 					c = packet_sniffer()
 					c.file(path)
-				spinner.stop()
+					spinner.stop()
+				print GRN + "[+]"+ NRM +" Completed"
+				print BLU + "[*]"+ NRM +" Time Taken: %.3f sec" % (time.time()-t) 
 				d.clean_up()
 				print colors.GRN + "[+] " + colors.NRM + "Cleaning Up Duplicates"
 				d = queries()
@@ -281,6 +287,9 @@ try:
 			except IOError:
 				spinner.stop()
 				print colors.RD + "Error: Non-existant path, please try again.\n" + colors.NRM
+				choice()
+				exec_menu(choice)
+				return
 			choice()
 			exec_menu(choice)
 			return
@@ -292,12 +301,15 @@ try:
 			menu_actions['main_menu']()
 		else:
 			try:
+				t = time.time()
 				spinner = Spinner()
 				spinner.start()
 				path = option
 				c = packet_sniffer()
 				c.file(path)
 				spinner.stop()
+				print GRN + "[+]"+ NRM +" Completed"
+				print BLU + "[*]"+ NRM +" Time Taken: %.3f sec" % (time.time()-t) 
 				print colors.GRN + "[+] " + colors.NRM + "Cleaning Up Duplicates"
 				d = queries()
 				d.db_connect(workspace)
