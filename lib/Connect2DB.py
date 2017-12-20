@@ -56,23 +56,22 @@ def connect_db():
     connection.text_factory = str
 
 class load():
+    def begin(self):
+        connection.execute("BEGIN TRANSACTION")
 
     def insert_ACCESS_POINT(self, SSID, MAC, VENDOR, CHL, SIG, ENC, CHR, ATH):
         connection.execute("insert into accessPoints (ESSID, BSSID, VENDOR, CHAN, PWR, ENC, CIPHER, AUTH) values (?,?,?,?,?,?,?,?)", (SSID, MAC, VENDOR, CHL, SIG, ENC, CHR, ATH))
-        connection.commit()
-        connection.close() 
 
     def Insert_Probe_REQUEST(self, SSID, MAC, VENDOR, SIG):
         connection.execute("insert into ProbeRequests (ESSID, CLIENT, VENDOR, PWR) values (?,?,?,?)", (SSID, MAC, VENDOR, SIG)) 
-        connection.commit()
-        connection.close() 
 
     def Insert_Probe_RESPONSE(self, SSID, MAC, VENDOR, CHL, SIG, ENC, CHR, ATH, RPCM):
         connection.execute("insert into ProbeResponses (ESSID, BSSID, VENDOR, CHAN, PWR, ENC, CIPHER, AUTH, CLIENT) values (?,?,?,?,?,?,?,?,?)", (SSID, MAC, VENDOR, CHL, SIG, ENC, CHR, ATH, RPCM))   
-        connection.commit()
-        connection.close() 
+
 
     def Insert_EAP(self, sender, user, ap):
         connection.execute("insert into EAP (SRC_MAC, USERNAME, BSSID) values (?,?,?)", (sender, user, ap))   
+
+    def Close(self):
         connection.commit()
-        connection.close() 
+        connection.close()
