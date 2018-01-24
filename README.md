@@ -7,7 +7,7 @@ SniffAir is developed by [@Tyl0us](https://twitter.com/Tyl0us) and [@theDarracot
 
 ## Install
 -----
-SniffAir was developed with Python version 2.7
+SniffAir was developed with Python version 2.7.
 
 Tested and supported on Kali Linux, Debian and Ubuntu. 
 
@@ -59,8 +59,8 @@ exit                     Exit SniffAir
 ```
 
 ## Begin
------
-First create or load a new or existing workspace using the command ```workspace create <workspace>``` or ```workspace load <workspace>``` command. To view all existing workspaces use the ```workspace list``` command and ```workspace delete <workspace>``` command to delete the desired workspace:
+---
+First create or load a new or existing workspace using the command `workspace create <workspace>` or `workspace load <workspace>` command. To view all existing workspaces use the `workspace list` command and `workspace delete <workspace>` command to delete the desired workspace:
  
 ```
  >>  [default]# workspace
@@ -71,7 +71,7 @@ First create or load a new or existing workspace using the command ```workspace 
 ```
 
 
-Load data into a desired workplace from a pcap file using the command ```offline_capture <the full path to the pcap file>```. To load a series of pcap files use the command ```offline_capture_list <the full path to the file containing the list of pcap name>``` (this file should contain the full patches to each pcap file). Use the ```live_capture <interface name>``` command to capture live wireless traffic using a wireless interface.
+Load data into a desired workplace from a pcap file using the command `offline_capture <the full path to the pcap file>`. To load a series of pcap files use the command `offline_capture_list <the full path to the file containing the list of pcap name>` (this file should contain the full patches to each pcap file). Use the `live_capture <interface name>` command to capture live wireless traffic using a wireless interface.
  
  ```
  >>  [demo]# offline_capture /root/sniffair/demo.pcapdump
@@ -85,7 +85,7 @@ Load data into a desired workplace from a pcap file using the command ```offline
 
 ## Show Command
 -----
-The ```show``` command displays the contents of a table, specific information across all tables or the available modules, using the following syntax:
+The `show` command displays the contents of a table, specific information across all tables or the available modules, using the following syntax:
 
 ```
  >>  [demo]# show table AP
@@ -110,16 +110,16 @@ Demo5ghz
 
 ```
 
-The ```query``` command can be used to display a unique set of data based on the parememters specificed. The ```query``` command uses sql syntax.
+The `query` command can be used to display a unique set of data based on the parameters specified. The `query` command uses sql syntax.
 
 ## Inscope
 -----
-the ```inscope <SSID>``` command can be used to add a SSID to the inscope tables, loading all related data to the inscope_AP, inscope_proberequests and inscope_proberesponses tables. To view a summary of all inscope SSIDS run the ```SSID_Info``` command.
+The `inscope <SSID>` command can be used to add a SSID to the inscope tables, loading all related data to the inscope_AP, inscope_proberequests and inscope_proberesponses tables. To view a summary of all inscope SSIDS run the `SSID_Info` command.
 
 ## Modules
 -----
 
-Modules can be used to analyze the data contained in the workspaces or perform offensive wireless attacks using the ```use <module name>``` command. For some modules additional variables may need to be set. They can be set using the set command ```set <variable name> <variable value>```:
+Modules can be used to analyze the data contained in the workspaces or perform offensive wireless attacks using the `use <module name>` command. For some modules additional variables may need to be set. They can be set using the set command `set <variable name> <variable value>`:
 ```
  >>  [demo]# show modules
 Available Modules
@@ -155,17 +155,17 @@ Globally Set Varibles
  Template: Cisco (More to be added soon)
  >>  [demo][Captive Portal]# 
 ```
-Once all varibles are set, then execute the ```exploit``` or ```run``` command to run the desired attack.
+Once all varibles are set, then execute the `exploit` or `run` command to run the desired attack.
 
 
 ## Export
 -----
-To export all information stored in a workspace’s tables using the ```Exporter``` module and setting the desired path.
+To export all information stored in a workspace's tables using the `Exporter` module and setting the desired path.
 
 
-## Acknowledgments
+## Acknowledgements
 -----
-Sniffiar contains work from the following repoisoties:
+SniffAir contains work from the following repositories:
 - [hostapd-wpe](https://github.com/OpenSecurityResearch/hostapd-wpe)
 - [jmalinen/hostap](https://github.com/jmalinen/hostap/tree/master/wpaspy)
 - [lootbooty](https://github.com/Torinson/lootbooty)
