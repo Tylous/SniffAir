@@ -59,7 +59,7 @@ exit                     Exit SniffAir
 ```
 
 ## Begin
----
+-----
 First create or load a new or existing workspace using the command `workspace create <workspace>` or `workspace load <workspace>` command. To view all existing workspaces use the `workspace list` command and `workspace delete <workspace>` command to delete the desired workspace:
  
 ```
