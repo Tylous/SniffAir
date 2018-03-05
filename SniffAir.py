@@ -237,7 +237,7 @@ try:
 			try:
 				global interface
 				global band
-				band = raw_input(" >>  Do you want to sniff 2.4ghz, 5.5ghz or both?[2.4/5.5/both]# ")
+				band = raw_input(" >>  Do you want to sniff 2.4ghz, 5.8ghz or both?[2.4/5.8/both]# ")
 				interface = option
 				c = packet_sniffer()
 				c.live_capture(interface, band)
