@@ -48,10 +48,12 @@ class packet_sniffer():
 		sw = '1'
 		if band == "2.4":
 			bd = "bg"
-		elif band == "5.5":
+		elif band == "5.8":
 			bd = "a"
 		elif band == "both":
 			bd = "abg"
+		print GRN + "[+]"+ NRM +" Stopping Network-manager Service...."
+		os.system('service network-manager stop')
 		os.system('sudo screen -S sniff -d -m airodump-ng '+ interface +' --band '+ bd)
 		time.sleep(2)
 		print GRN + "[+]"+ NRM +" Sniffing... to monitor it yourself, open a new terminal and run: screen -r"
@@ -64,15 +66,18 @@ class packet_sniffer():
 			except OSError:
 				os.system('sudo screen -S sniff -X quit')
 				print "\n" + RD + "[+]"+ NRM +" Network interface went down"
-				break
-			except socket.error:
+				continue
+			except socket.error as error:
+				print error
 				continue
 			except KeyboardInterrupt:
 				time.sleep(2)
 				os.system('sudo screen -S sniff -X quit')
-				break
+				continue
 			sql.Close()
 			break
+		print GRN + "[+]"+ NRM +" Restarting Network-manager Serivce"	
+		os.system('service network-manager start')
 
 	def Sniffer(self, pkt):
 		global connection
@@ -162,7 +167,7 @@ class packet_sniffer():
 			SIG = pkt[Dot11Common].Antsignal
 
 		if sw == '1':
-			SIG = -(256-ord(pkt.notdecoded[-2:-1]))
+			SIG = -(256-ord(pkt.notdecoded[-4:-3]))
 
 
 
