@@ -66,18 +66,23 @@ class packet_sniffer():
 			except OSError:
 				os.system('sudo screen -S sniff -X quit')
 				print "\n" + RD + "[+]"+ NRM +" Network interface went down"
-				continue
+				break
 			except socket.error as error:
 				print error
 				continue
 			except KeyboardInterrupt:
 				time.sleep(2)
-				os.system('sudo screen -S sniff -X quit')
-				continue
+				return
 			sql.Close()
 			break
+		os.system('sudo screen -S sniff -X quit')
 		print GRN + "[+]"+ NRM +" Restarting Network-manager Serivce"	
 		os.system('service network-manager start')
+		print GRN + "[+]"+ NRM +" Restoring Interface to Managed Mode"
+		os.system('ifconfig ' +interface+ ' down')
+		os.system('iw ' +interface+ ' set type managed')
+		os.system('ifconfig ' +interface+ ' up')
+
 
 	def Sniffer(self, pkt):
 		global connection
