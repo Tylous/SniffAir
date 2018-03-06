@@ -54,8 +54,12 @@ class packet_sniffer():
 			bd = "abg"
 		print GRN + "[+]"+ NRM +" Stopping Network-manager Service...."
 		os.system('service network-manager stop')
+		print GRN + "[+]"+ NRM +" Stopping WPA_Supplicant Service...."
+		os.system('service wpa_supplicant stop')
+		os.system('ifconfig ' +interface+ ' down')
+                os.system('iw ' +interface+ ' set type monitor')
+                os.system('ifconfig ' +interface+ ' up')
 		os.system('sudo screen -S sniff -d -m airodump-ng '+ interface +' --band '+ bd)
-		time.sleep(2)
 		print GRN + "[+]"+ NRM +" Sniffing... to monitor it yourself, open a new terminal and run: screen -r"
 		sql = load()
 		connect_db()
@@ -76,13 +80,12 @@ class packet_sniffer():
 			sql.Close()
 			break
 		os.system('sudo screen -S sniff -X quit')
-		print GRN + "[+]"+ NRM +" Restarting Network-manager Serivce"	
+		print GRN + "[+]"+ NRM +" Restarting Network-manager Serivce"
 		os.system('service network-manager start')
 		print GRN + "[+]"+ NRM +" Restoring Interface to Managed Mode"
 		os.system('ifconfig ' +interface+ ' down')
 		os.system('iw ' +interface+ ' set type managed')
 		os.system('ifconfig ' +interface+ ' up')
-
 
 	def Sniffer(self, pkt):
 		global connection
