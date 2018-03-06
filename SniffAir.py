@@ -238,13 +238,19 @@ try:
 				global interface
 				global band
 				band = raw_input(" >>  Do you want to sniff 2.4ghz, 5.8ghz or both?[2.4/5.8/both]# ")
-				interface = option
-				c = packet_sniffer()
-				c.live_capture(interface, band)
-				print colors.GRN + "[+] " + colors.NRM + "Cleaning Up Duplicates"
-				d = queries()
-				d.db_connect(workspace)
-				d.clean_up()
+				if band == '2.4' or band == '5.8' or band == 'both':
+					interface = option
+					c = packet_sniffer()
+					c.live_capture(interface, band)
+					print colors.GRN + "[+] " + colors.NRM + "Cleaning Up Duplicates"
+					d = queries()
+					d.db_connect(workspace)
+					d.clean_up()
+				else:
+					print colors.RD + "Error: invalid frequency, please try again.\n" + colors.NRM
+                                	choice()
+                                	exec_menu(choice)
+                                	return
 			except socket.error:
 				print colors.RD + "Error: Non-existant interface, please try again.\n" + colors.NRM
 				choice()
@@ -259,8 +265,6 @@ try:
 		else:
 			try:
 				t = time.time()
-				
-				
 				d = queries()
 				d.db_connect(workspace)
 				filepath = option
