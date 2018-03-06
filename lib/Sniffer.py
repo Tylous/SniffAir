@@ -54,6 +54,7 @@ class packet_sniffer():
 			bd = "abg"
 		print GRN + "[+]"+ NRM +" Stopping Network-manager Service...."
 		os.system('service network-manager stop')
+		time.sleep(2)
 		os.system('sudo screen -S sniff -d -m airodump-ng '+ interface +' --band '+ bd)
 		time.sleep(2)
 		print GRN + "[+]"+ NRM +" Sniffing... to monitor it yourself, open a new terminal and run: screen -r"
