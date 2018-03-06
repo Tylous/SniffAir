@@ -125,7 +125,7 @@ try:
 			t2 = "select ESSID from "
 			where = ''
 			self.main(t2, where)
-			self.enablePrint() 
+			self.enablePrint()
 			if str(option) == "update":
 				rssid = str(self.show_inscope_ssids())
 				rssid = rssid.split('\n')
