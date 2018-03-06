@@ -121,9 +121,10 @@ try:
 				print colors.RD + "Error: Table does not exist or is empty, please try again.\n" + colors.NRM
 
 		def in_scope(self, option):
-			showvar = 'SSIDS'
 			self.blockPrint()
-			self.show(showvar)
+			t2 = "select ESSID from "
+			where = ''
+			self.main(t2, where)
 			self.enablePrint()
 			if str(option) == "update":
 				rssid = str(self.show_inscope_ssids())
