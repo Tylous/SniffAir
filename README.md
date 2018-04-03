@@ -92,11 +92,11 @@ The ```show``` command displays the contents of a table, specific information ac
 +------+-----------+-------------------+-------------------------------+--------+-------+-------+----------+--------+
 |   ID | ESSID     | BSSID             | VENDOR                        |   CHAN |   PWR | ENC   | CIPHER   | AUTH   |
 |------+-----------+-------------------+-------------------------------+--------+-------+-------+----------+--------|
-|    1 | HoneyPot  | c4:6e:1f:0c:82:03 | TP-LINK TECHNOLOGIES CO. LTD. |      4 |   -17 | WPA2  | TKIP     | MGT    |
-|    2 | Demo      | 80:2a:a8:5a:fb:2a | Ubiquiti Networks Inc.        |     11 |   -19 | WPA2  | CCMP     | PSK    |
-|    3 | Demo5ghz  | 82:2a:a8:5b:fb:2a | Unknown                       |     36 |   -27 | WPA2  | CCMP     | PSK    |
-|    4 | HoneyPot1 | c4:6e:1f:0c:82:05 | TP-LINK TECHNOLOGIES CO. LTD. |     36 |   -29 | WPA2  | TKIP     | PSK    |
-|    5 | BELL456   | 44:e9:dd:4f:c2:7a | Sagemcom Broadband SAS        |      6 |   -73 | WPA2  | CCMP     | PSK    |
+|    1 | HoneyPot  | c4:6e:1f:0c:##:## | TP-LINK TECHNOLOGIES CO. LTD. |      4 |   -17 | WPA2  | TKIP     | MGT    |
+|    2 | Demo      | 80:2a:a8:5a:##:## | Ubiquiti Networks Inc.        |     11 |   -19 | WPA2  | CCMP     | PSK    |
+|    3 | Demo5ghz  | 82:2a:a8:5b:##:## | Unknown                       |     36 |   -27 | WPA2  | CCMP     | PSK    |
+|    4 | HoneyPot1 | c4:6e:1f:0c:##:## | TP-LINK TECHNOLOGIES CO. LTD. |     36 |   -29 | WPA2  | TKIP     | PSK    |
+|    5 | BELL456   | 44:e9:dd:4f:##:## | Sagemcom Broadband SAS        |      6 |   -73 | WPA2  | CCMP     | PSK    |
 +------+-----------+-------------------+-------------------------------+--------+-------+-------+----------+--------+
  >>  [demo]# show SSIDS
 ---------
