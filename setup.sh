@@ -137,23 +137,15 @@ echo -ne "[*] pandas\n"
 echo -ne "[*] logging\n"
 echo -ne "[*] PrettyTable\n"
 echo -ne "[*] tabulate\n"
-echo -ne "[*] BaseHTTPServer\n"
-echo -ne "[*] mimetypes\n"
-echo -ne "[*] scapy 2.3.3\n"
-echo -n "Do you wish to install these program? [y/n]"
+echo -ne "[*] scapy\n"
+echo -n "Do you wish to install these python modules? [y/n]"
 read answer
 if echo "$answer" | grep -iq "^y" ;then
 
-	pip install pandas
-	pip install logging
-	pip install PrettyTable
-	pip install tabulate
-	pip install BaseHTTPServer
-	pip install mimetypes
-	pip install git+https://github.com/secdev/scapy
-	echo -e "[+]All Dependinces installed. Run SniffAir.py to use SniffAir\n"
+	pip install -r requirements.txt
+	echo -e "[+]All Dependencies installed. Run SniffAir.py to use SniffAir\n"
 else :
-	echo -e "[-] ERROR: Dependinces not installed. SniffAir will not beable to run until they are install\n"
+	echo -e "[-] ERROR: Dependencies not installed. SniffAir will not be able to run until they are installed\n"
 	exit 1
 
 fi
