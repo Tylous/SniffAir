@@ -49,5 +49,10 @@ def main(workspace):
 			print "Completed"
 	except KeyError:
 		print "NO NEW SSIDS DISCOVERED."
-		HS = dp.read_sql('select * from Hidden_SSID', ws1)
-		print tabulate(HS, showindex=False, headers=HS.columns, tablefmt="psql")
+		HS_exist = dp.read_sql('SELECT name FROM sqlite_master WHERE name="Hidden_SSID"', ws1)
+		if HS_exist.empty:
+			pass
+		else:
+			HS = dp.read_sql('select * from Hidden_SSID', ws1)
+			print tabulate ( HS, showindex=False, headers=HS.columns, tablefmt="psql" )
+
