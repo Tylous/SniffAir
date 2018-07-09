@@ -634,9 +634,9 @@ try:
 				if module in ['Auto EAP']:
 					if list1['SSID'] and list1['Key_Management'] and list1['Encryption'] and list1['Password'] and list1['Interface']:
 						if not list1['Username_File']:
-								args = ' -s "'+ list1['SSID']+'" -K '+ list1['Key_Management'] +' -E '+list1['Encryption'] +' -W '+workspace+' -p '+ list1['Password']+' -i '+ list1['Interface']
+								args = ' -s "'+ list1['SSID']+'" -K '+ list1['Key_Management'] +' -E '+list1['Encryption'] +' -W '+workspace+' -p \''+ list1['Password']+\'' -i '+ list1['Interface']
 						else:
-							args = ' -s "'+ list1['SSID']+'" -K '+ list1['Key_Management'] +' -E '+list1['Encryption'] +' -U '+list1['Username_File']+' -p \''+ list1['Password']+\'' -i '+ list1['Interface']+' -W '+workspace+''
+							args = ' -s "'+ list1['SSID']+'" -K '+ list1['Key_Management'] +' -E '+list1['Encryption'] +' -U '+list1['Username_File']+' -p \''+ list1['Password']+\'' -i '+ list1['Interface']+' -W '+workspace+'
 						os.system('cd module/Auto_EAP/ && python Auto_EAP.py' +args+'&& cd ../../')
 					else:
 						print "Error: Invalid or Missing Arguements"
