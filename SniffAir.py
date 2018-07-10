@@ -14,7 +14,6 @@ from AP_Hunter import *
 import SSID_stat
 import export
 
-
 class colors:
 	GRN = '\033[92m'
 	RD = '\033[91m'
