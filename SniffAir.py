@@ -822,7 +822,10 @@ try:
 					else:
 						print "Error: Invalid or Missing Arguements"
 				if module in ['Proof Packet']:
-					args = ' -W ' + workspace
+					if workspace:
+						args = ' -W ' + workspace
+					else:
+						print "Error: Invalid or Missing Arguements"
 					if list1['SSID']:
 						args = args + ' -S ' + list1['SSID']
 					else:
