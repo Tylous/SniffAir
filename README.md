@@ -123,13 +123,18 @@ Modules can be used to analyze the data contained in the workspaces or perform o
 ```
  >>  [demo]# show modules
 Available Modules
+=================
 [+] Auto EAP - Automated Brute-Force Login Attack Against EAP Networks
 [+] Auto PSK - Automated Brute-Force Passphrase Attack Against PSK Networks
 [+] AP Hunter - Discover Access Point Within  a Certain Range Using a Specific Type of Encrpytion
 [+] Captive Portal - Web Based Login Portal to Capture User Entered Credentials (Runs as an OPEN Network)
 [+] Certificate Generator - Generates a Certificate Used by Evil Twin Attacks
-[+] Exporter - Exports Data Stored in a Workspace to a CVS File
+[+] Exporter - Exports Data Stored in a Workspace to a CSV File
 [+] Evil Twin - Creates a Fake Access Point, Clients Connect to Divulging MSCHAP Hashes or Cleartext Passwords
+[+] Handshaker - Parses Database or .pcapdump Files Extracting the Pre-Shared Handshake for Password Guessing (Hashcat or JTR Format)
+[+] Mac Changer - Changes The Mac Address of an Interface
+[+] Probe Packet - Sends Out Deauth Packets Targeting SSID(s)
+[+] Proof Packet - Parses Database or .pcapdump Files Extracting all Packets Related to the Inscope SSDIS
 [+] Run Hidden SSID - Discovers the Names of HIDDEN SSIDS
 [+] Suspicious AP - Looks for Access Points that: Is On Different Channel, use a Different Vendor or Encrpytion Type Then the Rest of The Network
  >>  [demo]# 
