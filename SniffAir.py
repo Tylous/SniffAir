@@ -841,7 +841,10 @@ try:
 					args = ' -i ' + list1['Interface'] + ' -d ' + list1['Delay'] + ' -c ' + list1['Count']
 					if list1['MAC']:
 						args = args + ' -m ' + list1['MAC']
-					elif list1['SSID']:
+					else:											
+						print "Error: Invalid or Missing Arguements"
+						return
+					if list1['SSID']:
 						args = args + ' -s ' + list1['SSID']
 						os.system('cd module/ && python Probe_Packet.py' + args + '&& cd ../../')
 					elif list1['SSID File']:
