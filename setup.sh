@@ -138,11 +138,13 @@ echo -ne "[*] logging\n"
 echo -ne "[*] PrettyTable\n"
 echo -ne "[*] tabulate\n"
 echo -ne "[*] scapy\n"
+echo -ne "[*] gmplot\n"
+echo -ne "[*] requests\n"
 echo -n "Do you wish to install these python modules? [y/n]"
 read answer
 if echo "$answer" | grep -iq "^y" ;then
 
-	pip install -r requirements.txt
+	pip2 install -r requirements.txt
 	echo -e "[+]All Dependencies installed. Run SniffAir.py to use SniffAir\n"
 else :
 	echo -e "[-] ERROR: Dependencies not installed. SniffAir will not be able to run until they are installed\n"

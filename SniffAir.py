@@ -21,7 +21,6 @@ from AP_Hunter import *
 import SSID_stat
 import export
 
-
 class colors:
 	def __init__(self):
 		pass
@@ -72,8 +71,8 @@ try:
 	workspace = ['workspace create', 'workspace delete', 'workspace list', 'workspace load']
 	show = ['show SSIDS', 'show AP_MAC', 'show Vendor', 'show Channel', 'show Client', 'show Encrpytion', 'show Username', 'show table', 'show inscope', 'show modules', 'show inscope']
 	table = ['show table AP', 'show table proberequests', 'show table proberesponses', 'show table EAP', 'show table hiddenssids', 'show table LOOT', 'show table inscope_AP', 'show table inscope_proberequests', 'show table inscope_proberesponses', ]
-	modules = ['use Hidden SSID', 'use Evil Twin', 'use Captive Portal', 'use Auto EAP', 'use Auto PSK', 'use Exporter', 'use AP Hunter', 'use Suspicious AP', 'use Certificate Generator', 'use Handshaker', 'use MAC Changer', 'use Proof Packet', 'use Probe Packet']
-	modset = ['set BSSID', 'set Channel', 'set Encryption', 'set SSID', 'set Interface', 'set WPA', 'set Key Management', 'set Password', 'set Username File', 'set Path', 'set Type', 'set PWR', 'set Country', 'set StateProvince', 'set City', 'set Client', 'set Email', 'set CommonName', 'set Server CommonName', 'set Password File']
+	modules = ['use Hidden SSID', 'use Evil Twin', 'use Captive Portal', 'use Auto EAP', 'use Auto PSK', 'use Exporter', 'use AP Hunter', 'use Suspicious AP', 'use Certificate Generator', 'use Handshaker', 'use MAC Changer', 'use Proof Packet', 'use Probe Packet', 'use Wigle Search SSID', 'use Wigle Search MAC']
+	modset = ['set BSSID', 'set Channel', 'set Encryption', 'set SSID', 'set Interface', 'set WPA', 'set Key Management', 'set Password', 'set Username File', 'set Path', 'set Type', 'set PWR', 'set Country', 'set StateProvince', 'set City', 'set Client', 'set Email', 'set CommonName', 'set Server CommonName', 'set Password File', 'set APIToken', 'set APIName', 'set MAC']
 
 
 	def completer(text, state):
@@ -438,6 +437,8 @@ try:
 			print "[+] Proof Packet - Parses Database or .pcapdump Files Extracting all Packets Related to the Inscope SSDIS"
 			print "[+] Run Hidden SSID - Discovers the Names of HIDDEN SSIDS"
 			print "[+] Suspicious AP - Looks for Access Points that: Is On Different Channel, use a Different Vendor or Encrpytion Type Then the Rest of The Network"
+			print "[+] Wigle Search SSID - Queries wigle for SSID (i.e. Bob's wifi)"
+			print "[+] Wigle Search MAC - Queries wigle for all observations of a single mac address"
 		d.show(option)
 		choice()
 		exec_menu(choice)
@@ -573,6 +574,16 @@ try:
 					print " MAC: " + (list1['MAC']) + "          MAC Address to Target a Specific Client or AP (Optional)"
 					print " SSID: " + (list1['SSID']) + "          The SSID to Deauth"
 					print " SSID File: " + (list1['InputFile']) + "          The Containing a List of SSID to Deauth (Optional)"
+				if (list1['Module']) in ["Wigle Search SSID"]:
+                                        print " Module: " + (list1['Module'])
+                                        print " APIName: " + (list1['APIName']) + "          Wigle API Name"
+                                        print " APIToken: " + (list1['APIToken']) + "          Wigle API Token"
+                                        print " SSID: " + (list1['SSID']) + "          SSID to query"
+				if (list1['Module']) in ["Wigle Search MAC"]:
+                                        print " Module: " + (list1['Module'])
+                                        print " APIName: " + (list1['APIName']) + "          Wigle API Name"
+                                        print " APIToken: " + (list1['APIToken']) + "          Wigle API Token"
+                                        print " MAC: " + (list1['MAC']) + "          MAC address to query"
 			except NameError:
 				pass
 		choice()
@@ -587,7 +598,7 @@ try:
 		else:
 			global module
 			global list1
-			list1 = {'Module': '', 'Interface': '', 'SSID': '', 'BSSID': '', 'Channel': '', 'Encryption': 'PEAP', 'WPA': '', 'Key_Management': 'WPA-EAP', 'Password': '', 'Username_File': '', 'Type': '', 'Country': '', 'StateProvince': '', 'City': '', 'Client': '', 'Email': '', 'CommonName': '', 'ServerCommonName': '', 'PasswordFile': '', 'Path': '', 'Format': '', 'MAC': '', 'InputFile': '', 'Delay': '', 'Count': ''}
+			list1 = {'Module': '', 'Interface': '', 'SSID': '', 'BSSID': '', 'Channel': '', 'Encryption': 'PEAP', 'WPA': '', 'Key_Management': 'WPA-EAP', 'Password': '', 'Username_File': '', 'Type': '', 'Country': '', 'StateProvince': '', 'City': '', 'Client': '', 'Email': '', 'CommonName': '', 'ServerCommonName': '', 'PasswordFile': '', 'Path': '', 'Format': '', 'MAC': '', 'InputFile': '', 'Delay': '', 'Count': '', 'APIName': '', 'APIToken': ''}
 			if option in ["Evil Twin"]:
 				module = option
 				list1.update(Module=module)
@@ -630,6 +641,12 @@ try:
 			elif option in ["Probe Packet"]:
 				module = option
 				list1.update(Module=module)
+			elif option in ["Wigle Search SSID"]:
+                                module = option
+                                list1.update(Module=module)
+			elif option in ["Wigle Search MAC"]:
+                                module = option
+                                list1.update(Module=module)
 			else:
 				print colors.RD + "Error: Non-existant module, please try again.\n" + colors.NRM
 		choice()
@@ -716,6 +733,14 @@ try:
 					global MAC
 					MAC = varibles[1]
 					list1.update(MAC=varibles[1])
+				if varibles[0] in ["APIName"]:
+                                        global APIName
+                                        APIName = varibles[1]
+                                        list1.update(APIName=varibles[1])
+				if varibles[0] in ["APIToken"]:
+                                        global APIToken
+                                        APIToken = varibles[1]
+                                        list1.update(APIToken=varibles[1])
 				if varibles[0] in ["Count"]:
 					global Count
 					Count = varibles[1]
@@ -841,7 +866,7 @@ try:
 					args = ' -i ' + list1['Interface'] + ' -d ' + list1['Delay'] + ' -c ' + list1['Count']
 					if list1['MAC']:
 						args = args + ' -m ' + list1['MAC']
-					else:											
+					else:
 						print "Error: Invalid or Missing Arguements"
 						return
 					if list1['SSID']:
@@ -852,6 +877,20 @@ try:
 						os.system('cd module/ && python Probe_Packet.py' + args + '&& cd ../../')
 					else:
 						print "Error: Invalid or Missing Arguements"
+				if module in ['Wigle Search SSID']:
+					args = ''
+                                        if list1['APIName'] and list1['APIToken'] and list1['SSID']:
+                                                args = ' ' + list1['APIName'] + ' ' + list1['APIToken'] + ' ' + list1['SSID']
+                                                os.system('cd module/ && python wigleSearchESSID.py' + args + '&& cd ../../')
+                                        else:
+                                                print "Error: Invalid or Missing Arguements"
+				if module in ['Wigle Search MAC']:
+                                        args = ''
+					if list1['APIName'] and list1['APIToken'] and list1['MAC']:
+						args = ' ' + list1['APIName'] + ' ' + list1['APIToken'] + ' ' + list1['MAC']
+                                                os.system('cd module/ && python wigleSearchBSSID.py' + args + '&& cd ../../')
+                                        else:
+                                                print "Error: Invalid or Missing Arguements"
 			except KeyboardInterrupt:
 				pass
 		choice()
