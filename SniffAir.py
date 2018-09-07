@@ -433,9 +433,9 @@ try:
 			print "[+] Exporter - Exports Data Stored in a Workspace to a CSV File"
 			print "[+] Evil Twin - Creates a Fake Access Point, Clients Connect to Divulging MSCHAP Hashes or Cleartext Passwords"
 			print "[+] Handshaker - Parses Database or .pcapdump Files Extracting the Pre-Shared Handshake for Password Guessing (Hashcat or JTR Format)"
-			print "[+] Proof Packet - Parses Database or .pcapdump Files Extracting all Packets Related to the Inscope SSDIS"
-			print "[+] Probe Packet - Sends Out Deauth Packets Targeting SSID(s)"
 			print "[+] Mac Changer - Changes The Mac Address of an Interface"
+			print "[+] Probe Packet - Sends Out Deauth Packets Targeting SSID(s)"
+			print "[+] Proof Packet - Parses Database or .pcapdump Files Extracting all Packets Related to the Inscope SSDIS"
 			print "[+] Run Hidden SSID - Discovers the Names of HIDDEN SSIDS"
 			print "[+] Suspicious AP - Looks for Access Points that: Is On Different Channel, use a Different Vendor or Encrpytion Type Then the Rest of The Network"
 		d.show(option)
