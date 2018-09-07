@@ -813,14 +813,20 @@ try:
 							IF_args = ""
 						args = ' -w ' + workspace + ' -f ' + list1['Format'] + ssid_args + path_args + IF_args
 						os.system('cd module/Handshaker/ && python Handshaker.py' + args + '&& cd ../../')
+					else:
+						print "Error: Invalid or Missing Arguements"
 				if module in ['MAC Changer']:
 					if list1['MAC'] and list1['Interface']:
 						args = ' -I ' + list1['Interface'] + ' -M ' + list1['MAC']
 						os.system('cd module/ && python MAC_Changer.py' + args + '&& cd ../../')
+					else:
+						print "Error: Invalid or Missing Arguements"
 				if module in ['Proof Packet']:
 					args = ' -W ' + workspace
 					if list1['SSID']:
 						args = args + ' -S ' + list1['SSID']
+					else:
+						print "Error: Invalid or Missing Arguements"
 					if list1['Path']:
 						args = args + ' -P ' + list1['Path']
 						os.system('cd module/ && python proof_packet.py' + args + '&& cd ../../')
@@ -832,11 +838,15 @@ try:
 						args = args + ' -m ' + list1['MAC']
 					elif list1['SSID']:
 						args = args + ' -s ' + list1['SSID']
+						os.system('cd module/ && python Probe_Packet.py' + args + '&& cd ../../')
 					elif list1['SSID File']:
 						args = args + ' -f ' + list1['InputFile']
-					# os.system('cd module/ && python Probe_Packet.py' + args + '&& cd ../../')
-					# else:
-					os.system('cd module/ && python Probe_Packet.py' + args + '&& cd ../../')
+						os.system('cd module/ && python Probe_Packet.py' + args + '&& cd ../../')
+					## os.system('cd module/ && python Probe_Packet.py' + args + '&& cd ../../')
+					## else:
+					#os.system('cd module/ && python Probe_Packet.py' + args + '&& cd ../../')
+					else:
+						print "Error: Invalid or Missing Arguements"
 				# print "Error: Invalid or Missing Arguements"
 			except KeyboardInterrupt:
 				pass
