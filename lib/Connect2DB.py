@@ -2,6 +2,7 @@
 
 import sys
 import os
+import subprocess
 import sqlite3
 from sqlite3 import Error
 from Connect2DB import *
@@ -42,13 +43,13 @@ def list():
         dbl.append("workspace load "+p)
 
 def display_list():
-    dl = str(os.listdir('db/'))[1:-1].replace('.db','').replace(',','').replace('\'','')
+    dl = str(os.listdir('db/'))[1:-1].replace(',','').replace('\'','')
     frame = dp.DataFrame(dl.split())
     print tabulate(frame, showindex=False, headers=['Workspaces'], tablefmt='psql')
 
 
-def delete_workspace(workspace):      
-    os.system('rm -rf db/'+workspace+'.db')
+def delete_workspace(workspace):
+    subprocess.call('rm -rf db/'+workspace, shell=True)
 
 def connect_db():
     global connection
@@ -56,22 +57,25 @@ def connect_db():
     connection.text_factory = str
 
 class load():
-    def begin(self):
-        connection.execute("BEGIN TRANSACTION")
+        def __init__(self):
+            pass
 
-    def insert_ACCESS_POINT(self, SSID, MAC, VENDOR, CHL, SIG, ENC, CHR, ATH):
-        connection.execute("insert into accessPoints (ESSID, BSSID, VENDOR, CHAN, PWR, ENC, CIPHER, AUTH) values (?,?,?,?,?,?,?,?)", (SSID, MAC, VENDOR, CHL, SIG, ENC, CHR, ATH))
+        def begin(self):
+            connection.execute("BEGIN TRANSACTION")
 
-    def Insert_Probe_REQUEST(self, SSID, MAC, VENDOR, SIG):
-        connection.execute("insert into ProbeRequests (ESSID, CLIENT, VENDOR, PWR) values (?,?,?,?)", (SSID, MAC, VENDOR, SIG)) 
+        def insert_ACCESS_POINT(self, SSID, MAC, VENDOR, CHL, SIG, ENC, CHR, ATH):
+            connection.execute("insert into accessPoints (ESSID, BSSID, VENDOR, CHAN, PWR, ENC, CIPHER, AUTH) values (?,?,?,?,?,?,?,?)", (SSID, MAC, VENDOR, CHL, SIG, ENC, CHR, ATH))
 
-    def Insert_Probe_RESPONSE(self, SSID, MAC, VENDOR, CHL, SIG, ENC, CHR, ATH, RPCM):
-        connection.execute("insert into ProbeResponses (ESSID, BSSID, VENDOR, CHAN, PWR, ENC, CIPHER, AUTH, CLIENT) values (?,?,?,?,?,?,?,?,?)", (SSID, MAC, VENDOR, CHL, SIG, ENC, CHR, ATH, RPCM))   
+        def Insert_Probe_REQUEST(self, SSID, MAC, VENDOR, SIG):
+            connection.execute("insert into ProbeRequests (ESSID, CLIENT, VENDOR, PWR) values (?,?,?,?)", (SSID, MAC, VENDOR, SIG))
+
+        def Insert_Probe_RESPONSE(self, SSID, MAC, VENDOR, CHL, SIG, ENC, CHR, ATH, RPCM):
+            connection.execute("insert into ProbeResponses (ESSID, BSSID, VENDOR, CHAN, PWR, ENC, CIPHER, AUTH, CLIENT) values (?,?,?,?,?,?,?,?,?)", (SSID, MAC, VENDOR, CHL, SIG, ENC, CHR, ATH, RPCM))
 
 
-    def Insert_EAP(self, sender, user, ap):
-        connection.execute("insert into EAP (SRC_MAC, USERNAME, BSSID) values (?,?,?)", (sender, user, ap))   
+        def Insert_EAP(self, sender, user, ap):
+            connection.execute("insert into EAP (SRC_MAC, USERNAME, BSSID) values (?,?,?)", (sender, user, ap))
 
-    def Close(self):
-        connection.commit()
-        connection.close()
+        def Close(self):
+            connection.commit()
+            connection.close()

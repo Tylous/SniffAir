@@ -10,6 +10,9 @@ import sys
 from tabulate import tabulate
 
 class colors:
+    def __init__(self):
+	    pass
+
     GRN = '\033[92m'
     RD = '\033[91m'
     NRM = '\033[0m'
@@ -18,10 +21,13 @@ class colors:
 tables = ['accessPoints', 'ProbeRequests', 'ProbeResponses','EAP']
 try:
 	class queries():
-	
+
+		def __init__(self):
+			pass
+
 		def __int__(self):
 			super(queries, self).__init__()
-		
+
 		def blockPrint(self):
 			sys.stdout = open(os.devnull, 'w')
 
@@ -50,11 +56,11 @@ try:
 				try:
 					qr = dp.read_sql('select * from '+ tb +'', con)
 					if tb_value == 0:
-						table = qr.sort_values('PWR', ascending=False).drop_duplicates(subset=['ESSID', 'BSSID', 'VENDOR', 'CHAN', 'ENC', 'CIPHER', 'AUTH'], keep='first')                   
+						table = qr.sort_values('PWR', ascending=False).drop_duplicates(subset=['ESSID', 'BSSID', 'VENDOR', 'CHAN', 'ENC', 'AUTH'], keep='first')
 					elif tb_value == 1:
 						table = qr.sort_values('PWR', ascending=False).drop_duplicates(subset=['ESSID', 'CLIENT', 'VENDOR'], keep='first')
 					elif tb_value == 2:
-						table = qr.sort_values('PWR', ascending=False).drop_duplicates(subset=['ESSID', 'BSSID', 'VENDOR', 'CHAN', 'ENC', 'CIPHER', 'AUTH', 'CLIENT'], keep='first')                 
+						table = qr.sort_values('PWR', ascending=False).drop_duplicates(subset=['ESSID', 'BSSID', 'VENDOR', 'CHAN', 'ENC', 'CIPHER', 'AUTH', 'CLIENT'], keep='first')
 					elif tb_value == 3:
 						table = qr.drop_duplicates(subset=['SRC_MAC', 'USERNAME', 'BSSID'], keep='first')
 					clrdb = table
@@ -68,8 +74,8 @@ try:
 					clrdb.index = clrdb.index + 1
 					del clrdb['index']
 					clrdb.to_sql(""+tb+"", con , if_exists="replace")
-				except pandas.io.sql.DatabaseError: 
-					continue  
+				except pandas.io.sql.DatabaseError:
+					continue
 
 		def Custom_Queries(self, option):
 			try:
@@ -83,14 +89,14 @@ try:
 				qr = dp.read_sql(CQ, con)
 				print (tabulate(qr.drop_duplicates(), showindex=False, headers=qr.columns, tablefmt="psql"))
 			except pandas.io.sql.DatabaseError:
-				pass  
+				pass
 
 
 		def show_table(self, option):
 			try:
 				if option in ["AP"]:
 					qr = dp.read_sql('select * from accessPoints', con)
-					print (tabulate(qr.drop_duplicates(), showindex=False, headers=qr.columns, tablefmt="psql")) 
+					print (tabulate(qr.drop_duplicates(), showindex=False, headers=qr.columns, tablefmt="psql"))
 				elif option in ["proberequests"]:
 					qr = dp.read_sql('select * from ProbeRequests', con)
 					print (tabulate(qr.drop_duplicates(), showindex=False, headers=qr.columns, tablefmt="psql"))
@@ -99,7 +105,7 @@ try:
 					print (tabulate(qr.drop_duplicates(), showindex=False, headers=qr.columns, tablefmt="psql"))
 				elif option in ["inscope_AP"]:
 					qr = dp.read_sql('select * from inscope_accessPoints', con)
-					print (tabulate(qr.drop_duplicates(), showindex=False, headers=qr.columns, tablefmt="psql")) 
+					print (tabulate(qr.drop_duplicates(), showindex=False, headers=qr.columns, tablefmt="psql"))
 				elif option in ["inscope_proberequests"]:
 					qr = dp.read_sql('select * from inscope_proberequests', con)
 					print (tabulate(qr.drop_duplicates(), showindex=False, headers=qr.columns, tablefmt="psql"))
@@ -115,7 +121,7 @@ try:
 				elif option in ["LOOT"]:
 					qr = dp.read_sql('select * from LOOT', con)
 					print (tabulate(qr.drop_duplicates(), showindex=False, headers=qr.columns, tablefmt="psql"))
-				else: 
+				else:
 					print colors.RD + "Error: Invalid query, please try again.\n" + colors.NRM
 			except pandas.io.sql.DatabaseError:
 				print colors.RD + "Error: Table does not exist or is empty, please try again.\n" + colors.NRM
@@ -151,7 +157,7 @@ try:
 								insqr.index = insqr.index + 1
 								del insqr['index']
 								insqr.to_sql("inscope_"+tb+"", con , if_exists="replace")
-							except pandas.io.sql.DatabaseError: 
+							except pandas.io.sql.DatabaseError:
 								continue
 						except pandas.io.sql.DatabaseError:
 							continue
@@ -178,7 +184,7 @@ try:
 						insqr.index = insqr.index + 1
 						del insqr['index']
 						insqr.to_sql("inscope_"+tb+"", con , if_exists="replace")
-					except pandas.io.sql.DatabaseError: 
+					except pandas.io.sql.DatabaseError:
 						continue
 			else:
 				print colors.RD + "SSID does not exist" + colors.NRM
@@ -190,12 +196,12 @@ try:
 				try:
 					qr = dp.read_sql('' + t2 +' '+ tb + where +'', con)
 					result = result.append(qr)
-				except pandas.io.sql.DatabaseError: 
+				except pandas.io.sql.DatabaseError:
 					continue
-			
+
 			result = result.drop_duplicates()
-			result = tabulate(result, showindex=False) 
-				
+			result = tabulate(result, showindex=False)
+
 		def show(self, option):
 			where = ''
 			if option in ["SSIDS"]:
@@ -232,12 +238,22 @@ try:
 			result = qr.to_string(formatters={'ESSID':'{{:<{}s}}'.format(qr['ESSID'].str.len().max()).format}, header=False, index=False)
 			return str(result)
 
+		def show_inscope_MACs(self):
+			qr = dp.read_sql('select BSSID from inscope_accessPoints', con)
+			result = qr.to_string(formatters={'BSSID':'{{:<{}s}}'.format(qr['BSSID'].str.len().max()).format}, header=False, index=False)
+			return str(result)
+
+		def show_MACs(self, SSID):
+			qr = dp.read_sql('select BSSID from inscope_accessPoints where ESSID = "'+SSID+'"', con)
+			result = qr.to_string(formatters={'BSSID':'{{:<{}s}}'.format(qr['BSSID'].str.len().max()).format}, header=False, index=False)
+			return str(result)
+
 		def loot(self, loot):
 			cl = dp.DataFrame(loot, index=[0])
 			cl = cl[['MAC', 'Username', 'Password']]
 			cl.reset_index(inplace=True)
 			del cl['index']
-			cl.to_sql("LOOT", con, index=False, if_exists="append")	
+			cl.to_sql("LOOT", con, index=False, if_exists="append")
 except NameError:
 	pass
 	print colors.RD + "Error: No workspace selected. Please Create or load a work" + colors.NRM
