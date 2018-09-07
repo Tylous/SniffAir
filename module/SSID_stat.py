@@ -36,15 +36,17 @@ def main(workspace):
 							result = result.append(qr)
 						except pandas.io.sql.DatabaseError: 
 							continue
-					result = result.drop_duplicates()
-					result = result.to_string(index=False, header=False)
 
+					result = result.drop_duplicates()
+					if v == "BSSID":
+						AP_Count =  str(len(result))
+					result = result.to_string(index=False, header=False)
 					info[j] = result
 					row.append(info[j])
 					j +=1
 				except ValueError:
-					continue	  
-			print 'SSID:'+ SSID
+					continue
+			print 'SSID: '+ SSID +' - APs Discovered: ' + AP_Count
 			x = PrettyTable(title)
 			x.add_row(row)
 			print x

