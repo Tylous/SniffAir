@@ -822,14 +822,16 @@ try:
 					else:
 						print "Error: Invalid or Missing Arguements"
 				if module in ['Proof Packet']:
-					if workspace:
-						args = ' -W ' + workspace
-					else:
+					if workspace == "default":
 						print "Error: Invalid or Missing Arguements"
+						return
+					else:
+						args = ' -W ' + str(workspace)
 					if list1['SSID']:
 						args = args + ' -S ' + list1['SSID']
 					else:
 						print "Error: Invalid or Missing Arguements"
+						return
 					if list1['Path']:
 						args = args + ' -P ' + list1['Path']
 						os.system('cd module/ && python proof_packet.py' + args + '&& cd ../../')
@@ -845,12 +847,8 @@ try:
 					elif list1['SSID File']:
 						args = args + ' -f ' + list1['InputFile']
 						os.system('cd module/ && python Probe_Packet.py' + args + '&& cd ../../')
-					## os.system('cd module/ && python Probe_Packet.py' + args + '&& cd ../../')
-					## else:
-					#os.system('cd module/ && python Probe_Packet.py' + args + '&& cd ../../')
 					else:
 						print "Error: Invalid or Missing Arguements"
-				# print "Error: Invalid or Missing Arguements"
 			except KeyboardInterrupt:
 				pass
 		choice()
