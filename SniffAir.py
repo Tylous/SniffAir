@@ -435,7 +435,7 @@ try:
 			print "[+] Mac Changer - Changes The Mac Address of an Interface"
 			print "[+] Probe Packet - Sends Out Deauth Packets Targeting SSID(s)"
 			print "[+] Proof Packet - Parses Database or .pcapdump Files Extracting all Packets Related to the Inscope SSDIS"
-			print "[+] Run Hidden SSID - Discovers the Names of HIDDEN SSIDS"
+			print "[+] Hidden SSID - Discovers the Names of HIDDEN SSIDS"
 			print "[+] Suspicious AP - Looks for Access Points that: Is On Different Channel, use a Different Vendor or Encrpytion Type Then the Rest of The Network"
 			print "[+] Wigle Search SSID - Queries wigle for SSID (i.e. Bob's wifi)"
 			print "[+] Wigle Search MAC - Queries wigle for all observations of a single mac address"
