@@ -86,11 +86,7 @@ then
 	Release=Gentoo
 	emerge --sync
 	emerge --oneshot portage
-	#apt-get install -y dnsmasq libssl-dev libnfnetlink-dev libnl-genl-3-dev wireshark tcpdump python-setuptools ca-certificates git make wget gcc pkg-config libnl-3-dev
-	#emerge dnsmasq ca-certificates make gcc pkg-config
-	#emerge wont install libssl-dev libnfnetlink-dev libnl-3-dev libnl-genl-3-dev python-setuptools 
-        #pentoo already has wireshark tcpdump git wget
-	easy_install pip
+	emerge net-dns/dnsmasq dev-vcs/git net-misc/wget net-analyzer/wireshark net-analyzer/tcpdump app-misc/ca-certificates sys-devel/make sys-devel/gcc dev-util/pkgconfig dev-libs/libnl dev-python/setuptools net-libs/libnfnetlink dev-libs/openssl dev-python/pip
 	pushd module/Auto_EAP/
 	python RunMeFirst.py
 	popd
@@ -191,7 +187,8 @@ echo -n "Do you wish to install these python modules? [y/n]"
 read answer
 if echo "$answer" | grep -iq "^y" ;then
 
-	pip2 install -r requirements.txt
+
+	pip2 install -r requirements.txt --user
 	echo -e "[+]All Dependencies installed. Run SniffAir.py to use SniffAir\n"
 else :
 	echo -e "[-] ERROR: Dependencies not installed. SniffAir will not be able to run until they are installed\n"
