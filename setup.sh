@@ -3,7 +3,7 @@ if lsb_release -d | grep -q "Kali"
 then
 	Release=Kali
 	apt-get update -y
-	apt-get install -y dnsmasq libssl1.0-dev libnfnetlink-dev libnl-3-dev libnl-genl-3-dev wireshark tcpdump python-setuptools ca-certificates git make wget gcc pkg-config libnl-3-dev
+	apt-get install -y dnsmasq libssl1.0-dev libnfnetlink-dev libnl-genl-3-dev wireshark tcpdump python-setuptools ca-certificates git make wget gcc pkg-config libnl-3-dev
         easy_install pip
 	pushd module/Auto_EAP/
 	python RunMeFirst.py
@@ -42,7 +42,7 @@ elif lsb_release -d | grep -q "Ubuntu"
 then
 	Release=Ubuntu
 	apt-get update -y
-	apt-get install -y dnsmasq libssl-dev libnfnetlink-dev libnl-3-dev libnl-genl-3-dev wireshark tcpdump python-setuptools ca-certificates git make wget gcc pkg-config libnl-3-dev
+	apt-get install -y dnsmasq libssl-dev libnfnetlink-dev libnl-genl-3-dev wireshark tcpdump python-setuptools ca-certificates git make wget gcc pkg-config libnl-3-dev
         easy_install pip
 	pushd module/Auto_EAP/
 	python RunMeFirst.py
@@ -85,7 +85,7 @@ elif lsb_release -d | grep -q "Debian"
 then
 	Release=Debian
 	apt-get update -y
-	apt-get install -y dnsmasq libssl1.0-dev libnfnetlink-dev libnl-3-dev libnl-genl-3-dev build-essential gcc wireshark tcpdump python-setuptools ca-certificates git make wget libnl-3-dev pkg-config
+	apt-get install -y dnsmasq libssl1.0-dev libnfnetlink-dev libnl-genl-3-dev build-essential gcc wireshark tcpdump python-setuptools ca-certificates git make wget libnl-3-dev pkg-config
         easy_install pip
 	pushd module/Auto_EAP/
 	python RunMeFirst.py
