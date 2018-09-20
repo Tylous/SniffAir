@@ -18,7 +18,6 @@ def main(workspace):
 			PR_ESSID = dp.read_sql('select ESSID from ProbeResponses where BSSID="'+v+'"', ws1).drop_duplicates()
 			PR_BSSID = dp.read_sql('select BSSID from ProbeResponses where BSSID="'+v+'"', ws1).drop_duplicates()
 			HST = dp.concat([PR_ESSID, PR_BSSID], axis=1, join='inner')
-			del HST['index']
 			HST.to_sql("Hidden_SSID", ws1 , if_exists="append")
 			rawr = dp.read_sql('select * from accessPoints', ws1)
 			if PR_ESSID.empty:
