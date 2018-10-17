@@ -4,7 +4,7 @@ then
 	Release=Kali
 	apt-get update -y
 	apt-get install -y dnsmasq libssl1.0-dev libnfnetlink-dev libnl-genl-3-dev wireshark tcpdump python-setuptools ca-certificates git make wget gcc pkg-config libnl-3-dev
-        easy_install pip
+        easy_install python-pip python-dev
 	pushd module/Auto_EAP/
 	python RunMeFirst.py
 	popd
