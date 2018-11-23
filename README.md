@@ -172,7 +172,7 @@ To export all information stored in a workspace’s tables using the ```Exporter
 
 ## Acknowledgments
 -----
-Sniffiar contains work from the following repoisoties:
+Sniffiar contains work from the following repositories:
 - [hostapd-wpe](https://github.com/OpenSecurityResearch/hostapd-wpe)
 - [jmalinen/hostap](https://github.com/jmalinen/hostap/tree/master/wpaspy)
 - [lootbooty](https://github.com/Torinson/lootbooty)
