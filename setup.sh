@@ -3,8 +3,7 @@ if lsb_release -d | grep -q "Kali"
 then
 	Release=Kali
 	apt-get update -y
-	apt-get install -y dnsmasq libssl1.0-dev libnfnetlink-dev libnl-genl-3-dev wireshark tcpdump python-setuptools ca-certificates git make wget gcc pkg-config libnl-3-dev
-        easy_install pip
+	apt-get install -y dnsmasq libssl1.0-dev libnfnetlink-dev libnl-genl-3-dev wireshark tcpdump python-setuptools ca-certificates git make wget gcc pkg-config libnl-3-dev easy_install pip
 	pushd module/Auto_EAP/
 	python RunMeFirst.py
 	popd
