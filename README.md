@@ -40,7 +40,7 @@ $./setup.sh
 Commands
 ========
 workspace                Manages workspaces (create, list, load, delete)
-live_capture             Initiates a valid wireless interface to collect wireless pakcets to be parsed (requires the interface name)
+live_capture             Initiates a valid wireless interface to collect wireless packets to be parsed (requires the interface name)
 offline_capture          Begins parsing wireless packets using a pcap file-kismet .pcapdump work best (requires the full path)
 offline_capture_list     Begins parsing wireless packets using a list of pcap file-kismet .pcapdump work best (requires the full path)
 query                    Executes a query on the contents of the acitve workspace
